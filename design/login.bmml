@@ -1,0 +1,84 @@
+<mockup version="1.0" skin="sketch" measuredW="855" measuredH="464" mockupW="419" mockupH="432">
+  <controls>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Title" x="498" y="22" w="258" h="-1" measuredW="258" measuredH="62" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>AzaAjaxChat</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::FieldSet" x="426" y="154" w="419" h="275" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Button" x="665" y="359" w="76" h="28" measuredW="55" measuredH="28" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Login</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Link" x="680" y="429" w="-1" h="-1" measuredW="147" measuredH="25" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>a%20new%20user%3F%20click%20here</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="__group__" x="534" y="169" w="-1" h="-1" measuredW="207" measuredH="60" zOrder="4" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="63" h="25" measuredW="63" measuredH="25" zOrder="0" locked="false" isInGroup="10">
+          <controlProperties>
+            <text>User%20Id%3A</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="31" w="207" h="-1" measuredW="79" measuredH="29" zOrder="1" locked="false" isInGroup="10">
+          <controlProperties>
+            <text/>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="11" controlTypeID="__group__" x="534" y="229" w="-1" h="-1" measuredW="207" measuredH="56" zOrder="5" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="67" h="25" measuredW="67" measuredH="25" zOrder="0" locked="false" isInGroup="11">
+          <controlProperties>
+            <text>Password%3A</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="27" w="207" h="-1" measuredW="79" measuredH="29" zOrder="1" locked="false" isInGroup="11">
+          <controlProperties>
+            <text/>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="12" controlTypeID="__group__" x="534" y="285" w="-1" h="-1" measuredW="207" measuredH="50" zOrder="6" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::ComboBox" x="0" y="25" w="207" h="-1" measuredW="123" measuredH="25" zOrder="0" locked="false" isInGroup="12">
+          <controlProperties>
+            <text>Chinese%20Simple</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="69" h="25" measuredW="67" measuredH="25" zOrder="1" locked="false" isInGroup="12">
+          <controlProperties>
+            <text>Language%3A</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::CheckBox" x="534" y="362" w="-1" h="-1" measuredW="109" measuredH="22" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Remember%20Me</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Link" x="468" y="428" w="-1" h="-1" measuredW="111" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>forget%20password%3F</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::TextInput" x="426" y="109" w="416" h="-1" measuredW="163" measuredH="30" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>14</size>
+        <state>up</state>
+        <text>Message%3A%20please%20login%21</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
