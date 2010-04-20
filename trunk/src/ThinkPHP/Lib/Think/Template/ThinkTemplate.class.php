@@ -235,7 +235,8 @@ class  ThinkTemplate extends Think
                 $_taglibs = C('_taglibs_');
                 foreach($this->tagLib as $tagLibName) {
                     // 内置标签库
-                    if(!import('Think.Template.TagLib.TagLib'.ucwords(strtolower($tagLibName)))) {
+                    $tagLibName   = strtolower($tagLibName);
+                    if(!import('Think.Template.TagLib.TagLib'.ucwords($tagLibName))) {
                         // 扩展标签库
                         if($_taglibs && isset($_taglibs[$tagLibName]))
                             // 'tagLibName'=>'importPath'
@@ -250,7 +251,7 @@ class  ThinkTemplate extends Think
         // 预先加载的标签库 无需在每个模板中使用taglib标签加载
         if(C('TAGLIB_PRE_LOAD')) {
             $tagLibs =  explode(',',C('TAGLIB_PRE_LOAD'));
-            foreach ($taglibs as $tag){
+            foreach ($tagLibs as $tag){
                 $this->parseTagLib($tag,$content);
             }
         }
