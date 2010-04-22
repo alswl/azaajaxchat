@@ -1,0 +1,52 @@
+html {
+	background-color: #f9f9f9;
+}
+
+.textleft {
+	text-align: left;
+}
+
+.textright {
+	text-align: right;
+}
+
+.textcenter {
+	text-align: center;
+}
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+.credits, .clear {
+	clear: both;
+}
+
+.partition {
+	padding: 0 10px;
+}
+
+.focus {
+	background: #0fc;
+}
+
+.half {
+	width: 50%;
+}
+
+.hide {
+	display: none;
+}
+
+.split {
+	color: #B6D1E4;
+}
+
+#header h1 a:link, #header h1 a:visited, #user-info a:link, #user-info a:visited, #footer a:link, #footer a:visited {
+	color: #FFFFFF;
+	text-decoration: none;
+}

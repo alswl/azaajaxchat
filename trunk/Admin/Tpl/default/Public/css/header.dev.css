@@ -1,0 +1,123 @@
+/*
+ Header.css
+ by dijingchao
+ */
+#header {
+	background: #1D507D;
+	height: 46px;
+}
+
+#header-logo {
+	float: left;
+	margin: 7px 0 0 15px;
+}
+
+#header h1 {
+	float: left;
+	font: 22px Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+	margin: 0;
+	padding: 10px 8px 5px;
+}
+
+#header h1 span {
+	font-size: 12px;
+}
+
+#header #site-visit-button {
+	background-color: #3C6B95;
+	color: #B6D1E4;
+	text-shadow: 0 -1px 0 #3F3F3F;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	background-position: 0 0;
+	background-repeat: repeat-x;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 50%;
+	font-style: normal;
+	line-height: 17px;
+	margin-left: 5px;
+	padding: 0 6px;
+	vertical-align: middle;
+}
+
+#header-info {
+	margin: 0 0 0 15px;
+	padding-right: 15px;
+}
+
+#user-info {
+	float: right;
+	font-size: 12px;
+	height: 46px;
+	line-height: 46px;
+}
+
+#user-info p {
+	line-height: 46px;
+}
+
+#favorite-actions {
+	float: right;
+	margin: 11px 12px 0;
+	min-width: 130px;
+	position: relative;
+}
+
+#favorite-first {
+	background: repeat-x scroll 0 center #5580A6;
+	border-color: #517EA5 #517EA5 #416686 !important;
+	-moz-border-radius: 12px;
+	-moz-border-radius: 12px;
+	-khtml-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
+	border-style: solid;
+	border-width: 1px;
+	line-height: 15px;
+	padding: 3px 30px 4px 12px;
+}
+
+.favorite-action {
+	padding: 3px 30px 4px 12px;
+}
+
+#favorite-actions .slide-up {
+}
+
+#favorite-actions .slide-down {
+	-moz-border-radius: 12px 12px 0 0;
+	-khtml-border-radius: 12px 12px 0 0;
+	-webkit-border-radius: 12px 12px 0 0;
+	border-radius: 12px 12px 0 0;
+}
+
+#favorite-actions a {
+	font-size: 12px;
+	color: #DDDDDD;
+}
+
+#favorite-toggle {
+	background: no-repeat scroll 0 -4px transparent;
+	height: 22px;
+	position: absolute;
+	right: 0;
+	top: 1px;
+	width: 28px;
+}
+
+#favorite-inside {
+	width: 126px;
+	background-color: #5580A6;
+	border-color: #5B86AC;
+	-moz-border-radius: 0 0 12px 12px;
+	border-style: solid;
+	border-width: 1px;
+	display: none;
+	margin: 0;
+	padding: 0 1px 6px;
+	position: absolute;
+	z-index: 11;
+}
