@@ -4,9 +4,9 @@
  * Created on 2010-04-19 20:04
  * Author: alswl
  */
-define("THINK_PATH", "ThinkPHP/");
+define("THINK_PATH", "../ThinkPHP/");
 define("APP_NAME", "Admin");
-define("APP_PATH", "./Admin");
+define("APP_PATH", "./");
 
 define("NO_CACHE_RUNTIME", true);
 
