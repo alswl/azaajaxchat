@@ -1,25 +1,12 @@
 <?php
-return array (
-	//'配置项'=>'配置值'
+$db_config = require 'db_config.php';
+$db_config = require 'user_config.php';
+$sys_config = array (
 
-//	'APP_GROUP_LIST' => 'Admin,Home',
-	'APP_DEBUG' => true,
+	//	'APP_GROUP_LIST' => 'Admin,Home',
 
-	'URL_MODEL' => 2,
-	'URL_HTML_SUFFIX' => '.html',
-
-	'DEBUG_MODE' => true,
-
-	'URL_CASE_INSENSITIVE' => true,
-
-	'DB_TYPE' => 'mysql',
-	'DB_HOST' => 'localhost',
-	'DB_NAME' => 'aac_db',
-	'DB_USER' => 'root',
-	'DB_PWD' => 'admin',
-	'DB_PORT' => '3306',
-	'DB_PREFIX' => '',
-
-//	'DEFAULT_GROUP' => 'Home'
+	//	'DEFAULT_GROUP' => 'Home'
 );
+
+return array_merge($db_config, $db_config, $sys_config);
 ?>

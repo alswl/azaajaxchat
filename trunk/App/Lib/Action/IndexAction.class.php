@@ -1,8 +1,8 @@
 <?php
-class IndexAction extends Action{
-    public function index(){
-    	
-    	$this->display();
-    }
+class IndexAction extends BaseAction {
+	public function index() {
+
+		$this->display();
+	}
 }
 ?>
