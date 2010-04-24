@@ -1,6 +1,6 @@
 <?php
 $db_config = require 'db_config.php';
-$db_config = require 'user_config.php';
+$user_config = require 'user_config.php';
 $sys_config = array (
 
 	//	'APP_GROUP_LIST' => 'Admin,Home',
@@ -8,5 +8,5 @@ $sys_config = array (
 	//	'DEFAULT_GROUP' => 'Home'
 );
 
-return array_merge($db_config, $db_config, $sys_config);
+return array_merge($db_config, $user_config, $sys_config);
 ?>
