@@ -5,8 +5,8 @@
  * Author: alswl
  */
 define("THINK_PATH", "ThinkPHP/");
-define("APP_NAME", "AzaAjaxChat");
-define("APP_PATH", "App");
+define("APP_NAME", "App");
+define("APP_PATH", "./App");
 
 define("NO_CACHE_RUNTIME", true);
 
