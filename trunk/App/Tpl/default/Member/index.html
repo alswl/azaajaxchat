@@ -8,11 +8,11 @@
 	</head>
 	<body>
 		<div id="login">
-			<h1><a href="#">AzaAjaxChat</a></h1>
+			<h1><a href="{:U('Index/index')}">AzaAjaxChat</a></h1>
 			<p class="message <empty name="message">hide</empty>">
 				{$message}
 			</p>
-			<form method="post" action="{:U(login)}" id="loginform">
+			<form method="post" action="{:U('login')}" id="loginform">
 				<p>
 					<label>
 						用户名：<input type="text" tabindex="10" size="20" value="" id="user_name" name="name"/>
@@ -30,7 +30,7 @@
 				</p>
 				<input type="hidden" name="goto" value="{$goto}"/>
 				<p class="right">
-					<button class="sexybutton" tabindex="100" id="submit" name="submit">
+					<button type="submit" class="sexybutton" tabindex="100" id="submit" name="submit">
 						<span><span><span class="accept">登录</span></span></span>
 					</button>
 				</p>

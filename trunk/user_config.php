@@ -3,10 +3,10 @@ if (!defined('THINK_PATH'))
 	exit ();
 return array (
 
-	'APP_DEBUG' => true,
+//	'APP_DEBUG' => true,
 //	'APP_DOMAIN_DEPLOY' => true,
 
-	'DEBUG_MODE' => true,
+//	'DEBUG_MODE' => true,
 	
 	'URL_MODEL' => 2,
 	'URL_HTML_SUFFIX' => '.html',
