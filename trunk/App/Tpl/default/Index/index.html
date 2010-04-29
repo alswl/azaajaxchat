@@ -20,8 +20,8 @@
 			<option>Private Room</option>
 			<option>Create Room</option>
 		</select>
-		Welcome <a href="#">alswl</a>
-		<a class="sexybutton" href="{:U('Member/logout')}"><span><span><span class="logout">Logout</span></span></span></a>
+		Welcome <a href="#">{@CURRENT_USER.login_name}</a>
+		<a class="sexybutton" href="{:U('Member/logout')}" tabindex="41"><span><span><span class="logout">Logout</span></span></span></a>
 		<span id="connect-status">Connected</span>
 		<select>
 			<option selected="selected">Online</option>
@@ -70,26 +70,26 @@
 			</ul>
 		</div>
 		<div id="function-container" class="clear">
-			<div id="input-container">
+			<div id="input-container" tabindex="01">
 				<textarea id="input-field" class="text-nofocus"></textarea>
-				<button class="sexybutton sexylarge" id="submit"> <span><span><span class="accept">Send</span></span></span> </button>
+				<button class="sexybutton sexylarge" id="submit" tabindex="11"> <span><span><span class="accept">Send</span></span></span> </button>
 			</div>
 			<div id="config-container">
 				<ul>
 					<li>
-						<button  class="sexybutton" title="Lock Screen"><span><span><span class="lock"></span></span></span></button>
+						<button  class="sexybutton" title="Lock Screen"  tabindex="31"><span><span><span class="lock"></span></span></span></button>
 					</li>
 					<li>
-						<button  class="sexybutton" title="Group"><span><span><span class="group"></span></span></span></button>
+						<button  class="sexybutton" title="Group" tabindex="32"><span><span><span class="group"></span></span></span></button>
 					</li>
 					<li>
-						<button  class="sexybutton" title="Sound"><span><span><span class="sound"></span></span></span></button>
+						<button  class="sexybutton" title="Sound" tabindex="33"><span><span><span class="sound"></span></span></span></button>
 					</li>
 					<li>
-						<button  class="sexybutton" title="Config"><span><span><span class="config"></span></span></span></button>
+						<button  class="sexybutton" title="Config" tabindex="34"><span><span><span class="config"></span></span></span></button>
 					</li>
 					<li>
-						<button  class="sexybutton" title="Help"><span><span><span class="help"></span></span></span></button>
+						<button  class="sexybutton" title="Help" tabindex="35"><span><span><span class="help"></span></span></span></button>
 					</li>
 				</ul>
 			</div>

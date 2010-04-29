@@ -4,9 +4,13 @@
  * Created on 2010-04-19 20:04
  * Author: alswl
  */
-define("THINK_PATH", "../ThinkPHP/");
+
+//显示所有错误
+error_reporting(E_ALL);
+
+define("THINK_PATH", "ThinkPHP/");
 define("APP_NAME", "Admin");
-define("APP_PATH", "./");
+define("APP_PATH", "./Admin");
 
 define("NO_CACHE_RUNTIME", true);
 
