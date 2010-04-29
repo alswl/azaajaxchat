@@ -8,7 +8,6 @@ class MemberAction extends Action {
 		$this->testIsLogin();
 
 		$type = $_GET['type'];
-		$goto = $_GET['goto'];
 
 		//事先定义好的空message类型
 		$message = '';
@@ -16,6 +15,11 @@ class MemberAction extends Action {
 			case "1" :
 				$message = "当前用户未登录，请登录后继续操作";
 				$goto = "Index/index";
+				break;
+			case "2" :
+				$message = "当前用户未登录，请登录后继续操作";
+				$goto = "./admin.php";
+				break;
 		}
 
 		$tplData = array (
@@ -26,7 +30,14 @@ class MemberAction extends Action {
 		$this->display();
 	}
 
+	//登录操作
 	public function login() {
+
+		//检查是否为Post方法
+		if (!$this->isPost()) {
+				header("Location: " . "index"); 
+			
+		}
 		
 		$this->testIsLogin();
 
@@ -38,15 +49,20 @@ class MemberAction extends Action {
 		$map['login_name'] = $userName;
 		$map['user_password'] = $userPassword;
 
-		$user = M("User")->where($map)->select();
+		$user = M("user")->where($map)->select();
+//		dump($user);
+		dump($goto);
 
+		if(!$user) {
+			$this->error("数据库连接错误！");
+		}
+		
 		if (isset ($user)) {
 			//用户状态为启用
 			if ('1' === $user[0]['status']) {
 				Session :: set(C('AAC_USER_AUTH_KEY'), $user[0]['id']);
 				Session :: set('CURRENT_USER', $user[0]);
-//				$this->redirect($goto, null, 3, '登录成功，正在跳转到登录前页面');
-				header("Location: " . U('Index/index')); 
+				$this->redirect($goto, null, 3, '登录成功，正在跳转到登录前页面');
 			} else {
 				$tplData = array (
 					'hasMessage' => 1,

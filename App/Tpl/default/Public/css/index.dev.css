@@ -63,6 +63,16 @@ h1 {
 	overflow: auto;
 }
 
+.chat-row{
+	margin: 4px 0;
+}
+.row-even {
+	background: #F1F1F1;
+}
+.row-odd {
+	background: #DEDFDF;
+}
+
 #function-container {
 }
 
