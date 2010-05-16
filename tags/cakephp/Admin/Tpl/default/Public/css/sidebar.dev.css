@@ -1,0 +1,19 @@
+/*
+ Sidebar.css
+ by dijingchao
+ */
+#sidebar {
+	width: 12%;
+	float: left;
+	list-style: none outside none;
+	padding: 15px;
+	border: 1px solid;
+	font-size: 0.9em;
+	margin: 15px 5px 15px 15px;
+	background: #ffffff;
+	border: 1px solid #AFAFAF;
+	-moz-border-radius: 15px;
+	-khtml-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+}

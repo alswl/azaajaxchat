@@ -1,0 +1,158 @@
+/**
+ * wpAdmin Frame
+ * Reset the different of browsers
+ * author: alswl
+ * site: http://dddspace.com
+ * mail: alswlx@gmail.com
+ *
+ */ * {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	color: #111;
+	font-family: '微软雅黑', 'Lucida Sans Unicode', 'Lucida Sans', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Sans Vera', Verdana, Arial, Tahoma, Helvetica, Sans-Serif;
+	font-style: normal;
+	line-height: 1.5em;
+	font-size: 14px;
+	min-width: 790px;
+}
+
+code, pre {
+	font-family: Courier, 'Lucida Console', 'Courier New', Sans-Serif;
+}
+
+pre {
+	font-size: 100%;
+	line-height: 200%;
+	width: 100%;
+	max-height: 400px;
+	overflow: auto;
+	padding: 5px;
+	background: #eee;
+}
+
+p {
+	font-size: 100%;
+	padding: 0;
+}
+
+h1, h2, h3, h4 {
+	font-family: '微软雅黑', Georgia, 'Trebuchet MS', 'Lucida Sans', 'Lucida Grande', 'Bitstream Sans Vera', Verdana, Arial, Tahoma, Helvetica, Sans-Serif;
+}
+
+h1 {
+	font-size: 200%;
+}
+
+h2 {
+	font-size: 160%;
+}
+
+h3 {
+	font-size: 140%;
+}
+
+h4 {
+	font-size: 120%;
+}
+
+blockquote {
+	margin-left: 0;
+	padding-left: 1em;
+	border-left: 15px solid;
+}
+
+blockquote p:before {
+	content: open-quote;
+	font-size: 1.5em;
+}
+
+blockquote p:after {
+	content: close-quote;
+	font-size: 1.5em;
+}
+
+a:link, a:visited {
+	font-weight: 400;
+	text-decoration: none;
+}
+
+a:hover, a:active {
+	color: #666;
+	text-decoration: none;
+	border: none;
+}
+
+form {
+}
+
+input, textarea, select, option {
+	font-family: 'Lucida Sans', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Sans Vera', Verdana, Arial, Tahoma, Helvetica, Sans-Serif;
+	font-size: 100%;
+	margin: 2px;
+	padding: 0.3em;
+}
+
+fieldset, legend {
+	background: transparent;
+	padding: 5px;
+}
+
+fieldset {
+	border: 1px solid;
+}
+
+label, legend {
+	font-weight: 400;
+}
+
+ul {
+	list-style-type: none;
+	list-style-position: outside;
+}
+
+ol {
+	list-style-position: outside;
+}
+
+ol li {
+	clear: both;
+	list-style: none;
+}
+
+table {
+	color: #111;
+	width: 96%;
+	margin: 2px auto;
+	padding: 0;
+	border: 1px solid;
+	border-collapse: collapse;
+}
+
+table th {
+	text-align: center;
+}
+
+caption {
+	font-weight: 700;
+	padding: 5px;
+}
+
+td, th, tr {
+	text-align: left;
+	vertical-align: top;
+	padding: 3px;
+	border: 1px solid;
+}
+
+hr {
+	border: 1px solid;
+	margin: 1em 0;
+}
+
+img {
+	margin: 0 2px;
+	max-width: 600px;
+}
