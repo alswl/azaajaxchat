@@ -1,0 +1,116 @@
+/**
+ * wpAdmin Frame
+ * index css
+ * author: alswl
+ * site: http://dddspace.com
+ * mail: alswlx@gmail.com
+ *
+ */
+/*---- Global ----*/
+/*---- Layout ----*/
+#wrapper {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#container {
+}
+
+#chat-list-container {
+	float: left;
+	width: 64%;
+	height: 400px;
+	-moz-border-radius: 11px;
+	-moz-box-shadow: 0 4px 18px #666666;
+	-webkit-box-shadow: 0 4px 18px #666666;
+	-khtml-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	background: none repeat scroll 0 0 #FFFFFF;
+	padding: 10px;
+}
+
+#sidebar {
+	float: right;
+	width: 28%;
+	height: 400px;
+	padding: 10px;
+	margin: 0 0 20px;
+	-moz-border-radius: 11px;
+	-moz-box-shadow: 0 4px 18px #666666;
+	-webkit-box-shadow: 0 4px 18px #666666;
+	-khtml-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	background: none repeat scroll 0 0 #FFFFFF;
+}
+
+#footer {
+	text-align: center;
+	margin-top: 30px;
+}
+
+/*---- Header ----*/
+h1 {
+	display: inline;
+}
+
+/*---- Container ----*/
+#chat-list {
+	border: 2px solid #aaa;
+	height: 92%;
+	padding: 10px;
+	overflow: auto;
+}
+
+.chat-row{
+	margin: 4px 0;
+}
+.row-even {
+	background: #F1F1F1;
+}
+.row-odd {
+	background: #DEDFDF;
+}
+
+#function-container {
+}
+
+#input-container {
+	float: left;
+	width: 70%;
+}
+
+#config-container {
+	float: right;
+	width: 28%;
+}
+
+#input-field {
+	width: 500px;
+	-moz-border-radius: 11px;
+	-khtml-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	background: none repeat scroll 0 0 #FFFFFF;
+}
+
+#config-container li {
+	float: left;
+}
+
+/*---- Sibebar ----*/
+#sidebar h3 {
+	margin: 8px;
+	text-align: center;
+}
+
+#user-list {
+	height: 340px;
+	overflow: auto;
+	padding: 5px;
+}
+
+#user-list ul {
+	margin-left: 20px;
+}
