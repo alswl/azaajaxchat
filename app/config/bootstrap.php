@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is loaded automatically by the app/webroot/index.php file after the core bootstrap.php
  *
@@ -48,4 +49,15 @@
  * Inflector::rules('plural', array('rules' => array(), 'irregular' => array(), 'uninflected' => array()));
  *
  */
+
+//全局变量定义
+//if (!isset ($globalAAC)) {
+//	global $globalAAC;
+//	$globalAAC = array (
+//		'currentMessageId' => -1,
+//		'onlineUsers' => array()
+//	);
+//}
+//Configure::write('AACcurrentMessageId', -1);
+//Configure::write('AAConlineUsers', array(''));
 ?>

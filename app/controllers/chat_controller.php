@@ -13,14 +13,15 @@ class ChatController extends AppController {
 	//去除Model关联，取消DB连接测试
 	var $uses = array ();
 	var $components = array (
-		'RequestHandler'
+		'RequestHandler',
+		'Xml'
 	);
 	var $helpers = array (
 		'Javascript'
 	);
 
 	function beforeFilter() {
-		$this->RequestHandler->setContent('json', 'text/x-json');
+//		$this->RequestHandler->setContent('json', 'text/x-json');
 	}
 
 	//ajax 轮询 json格式
@@ -35,19 +36,63 @@ class ChatController extends AppController {
 
 	}
 
+	//ajax 轮询 XML格式
 	function getXml() {
 		$this->layout = "xml/stream";
 		Configure :: write('debug', 0);
-		
+
+		//获取URL参数中的messageId参数
+		$messageId = $this->params['url']['messageId'];
+
+		//xml化在线用户列表
+//		$userId = 1;
+//		$userLoginName = 'alswl';
+//		$users = "<user userId=\"$userId\" userLoginName=\"$userLoginName\" />";
+
+//		var_dump(Configure::read('AACcurrentMessageId'));
+//		$config = & Configure::getInstance();
+
+		$this->loadModel('OnlineUser');
+//		var_dump($this->OnlineUser->find('all'));
+		$users = $this->Xml->getXmlOnlineUsers($this->OnlineUser->find('all'));
+
+		//xml化消息列表
+		$messageFrom = 'aUser';
+		$isBoardcast = 'true';
+		$messageTo = '';
+		$messageTime = date('H:i:s');
+		$messageContent = 'text here';
+		$messages = "<message from=\"$messageFrom\" isBoardast=\"$isBoardcast\" to=\"$messageTo\"  messageTime=\"$messageTime\">"
+			. "$messageContent" . "</message>";
+
+			
 		$this->set(array (
 			'streamTime' => date('Y-m-d'),
-			'userId' => '0',
-			'userLoginName' => 'alswl',
-			'channelId' => '0',
-			'messageFrom' => 'aUser',
-			'messageTo' => 'bUser',
-			'messageTime' => date('H:i'),
-			'userLoginName' => 'text here'
+			'users' => $users,
+			'channelId' => '1',
+			'messages' => $messages
+		));
+	}
+
+	function post() {
+		$this->layout = "ajax";
+		//		Configure :: write('debug', 0);
+		//载入Message 模型控制
+		$this->loadModel('Message');
+
+		$inputField = $this->params['form']['inputField'];
+		$channelId = $this->Session->read('AAC_CHANNEL_ID');
+		$isBoardcast = $this->params['form']['isBoardcast'];
+		//添加一条聊天记录
+		echo $this->Message->create();
+		echo $this->Message->save(array (
+			'Message' => array (
+				'channel_id' => $channelId,
+				is_boardcast => $isBoardcast,
+				message_from => $this->Session->read('AAC_USER_ID'),
+				'message_time' => date('Y-m-d H:i:s'),
+				'content' => $inputField
+			)
 		));
 	}
 

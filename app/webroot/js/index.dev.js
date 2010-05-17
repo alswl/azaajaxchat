@@ -26,6 +26,8 @@ $(function(){
 	$("#chat-list div:even").addClass("row-even");
 	$("#chat-list div:odd").addClass("row-odd");
 	
+	// 聊天框回复按钮点击
+	$("#submit").click(postData);
 	// 聊天框Ctrl+Enter回复
 	$("#input-field").keypress(function(e){
 		if (e.ctrlKey && e.which == 13 || e.which == 10) {
@@ -80,8 +82,10 @@ function getRemoteData(){
 
 function postData(){
 
-	var postData = 'input-field=' + $('#input-field').val();
-	jQuery.post("http://localhost/AzaAjaxChat/src/Chat/post", postData, postDataCallBack);
+	var postData = 'inputField=' + $('#input-field').val() +
+		'&isBoardcast=true' +
+		'';
+	jQuery.post("http://localhost/AzaAjaxChat/src/Chat/post", postData);
 	$('#input-field').val('');
 }
 

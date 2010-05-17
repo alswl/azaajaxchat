@@ -3,11 +3,12 @@
 	<fieldset>
  		<legend><?php printf(__('Admin Add %s', true), __('Message', true)); ?></legend>
 	<?php
-		echo $this->Form->input('message_from');
-		echo $this->Form->input('content');
-		echo $this->Form->input('message_to');
-		echo $this->Form->input('send_time');
+		echo $this->Form->input('channel_id');
 		echo $this->Form->input('is_boardcast');
+		echo $this->Form->input('message_from');
+		echo $this->Form->input('message_to');
+		echo $this->Form->input('message_time');
+		echo $this->Form->input('content');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit', true));?>

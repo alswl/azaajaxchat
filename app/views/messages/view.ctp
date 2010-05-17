@@ -6,14 +6,19 @@
 			<?php echo $message['Message']['id']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Channel Id'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $message['Message']['channel_id']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Is Boardcast'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $message['Message']['is_boardcast']; ?>
+			&nbsp;
+		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Message From'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $message['Message']['message_from']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Content'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $message['Message']['content']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Message To'); ?></dt>
@@ -21,14 +26,14 @@
 			<?php echo $message['Message']['message_to']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Send Time'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Message Time'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $message['Message']['send_time']; ?>
+			<?php echo $message['Message']['message_time']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Is Boardcast'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Content'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $message['Message']['is_boardcast']; ?>
+			<?php echo $message['Message']['content']; ?>
 			&nbsp;
 		</dd>
 	</dl>
