@@ -40,33 +40,7 @@
 		<div id="sidebar"> <span> </span>
 			<h3>Current User Online</h3>
 			<ul id="user-list" class="filetree treeview-famfamfam">
-				<li> <span class="folder">aUser</span>
-					<ul>
-						<li><a href="#"><span class="file">Chat with him</span></a></li>
-						<li><a href="#"><span class="file">Action</span></a></li>
-						<li><a href="#"><span class="file">Voice Chat</span></a></li>
-						<li><a href="#"><span class="file">Send File</span></a></li>
-						<li><a href="#"><span class="file">Block him</span></a></li>
-					</ul>
-				</li>
-				<li> <span class="folder">aUser</span>
-					<ul>
-						<li><a href="#"><span class="file">Chat with him</span></a></li>
-						<li><a href="#"><span class="file">Action</span></a></li>
-						<li><a href="#"><span class="file">Voice Chat</span></a></li>
-						<li><a href="#"><span class="file">Send File</span></a></li>
-						<li><a href="#"><span class="file">Block him</span></a></li>
-					</ul>
-				</li>
-				<li> <span class="folder">cUser</span>
-					<ul>
-						<li><a href="#"><span class="file">Chat with him</span></a></li>
-						<li><a href="#"><span class="file">Action</span></a></li>
-						<li><a href="#"><span class="file">Voice Chat</span></a></li>
-						<li><a href="#"><span class="file">Send File</span></a></li>
-						<li><a href="#"><span class="file">Block him</span></a></li>
-					</ul>
-				</li>
+				<?php echo $onlineUsers; ?>
 			</ul>
 		</div>
 		<div id="function-container" class="clear">

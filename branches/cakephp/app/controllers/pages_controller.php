@@ -9,8 +9,10 @@
 
 class PagesController extends AppController {
 
-	public $name = 'Pages';
-	public $uses = null;
+	var $name = 'Pages';
+	var $uses = null;
+	
+	var $components = array ('Html');
 	
 	function beforeFilter() {
 		
@@ -27,6 +29,12 @@ class PagesController extends AppController {
 	}
 
 	function display() {
+		
+		//初始化在线用户列表
+		$this->loadModel('OnlineUser');
+		$onlineUsers = $this->Html->getHtmlOnlineUsers($this->OnlineUser->find('all'));
+		
+		$this->set(array('onlineUsers'=>$onlineUsers));
 		$this->render('home');
 	}
 	

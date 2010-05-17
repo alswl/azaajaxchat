@@ -1,13 +1,9 @@
 <?php echo '<?xml version="1.0" encoding="UTF-8"?>' ?>
-<stream time="<?php echo $streamTime;?>">
+<stream time="<?php echo $streamTime;?>" channelId="<?php echo $channelId;?>">
     <users>
-        <user userId="<?php echo $userId;?>" channelId="<?php echo $channelId;?>">
-            <?php echo $userLoginName;?>
-        </user>
+    	<?php echo $users;?>
     </users>
     <messages>
-    	<message from="<?php echo $messageFrom;?>" to="<?php echo $messageTo;?>"  time="<?php echo $messageTime;?>">
-    		<?php echo $userLoginName;?>
-    	</message>
+    	<?php echo $messages;?>
     </messages>
 </stream>

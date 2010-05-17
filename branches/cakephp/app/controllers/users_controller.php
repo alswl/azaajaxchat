@@ -4,14 +4,48 @@ class UsersController extends AppController {
 	var $name = 'Users';
 	var $helpers = array('Javascript');
 	var $components = array('RequestHandler');
+	
 
 	function login() {
 		if (!empty($this->params['form'])) {
 			$user = $this->User->findByLoginName($this->params['form']['name']);
+			//用户存在并且密码正确
 			if (!empty($user) && $user['User']['user_password'] == $this->params['form']['password']) {
+				//用户状态为启用
 				if ($user['User']['status'] == 1) {
+					//写SESSION相关内容
 					$this -> Session -> write('AAC_USER_ID', $user['User']['id']);
 					$this -> Session -> write('AAC_USER_LOGIN_NAME', $user['User']['login_name']);
+					$this -> Session -> write('AAC_CHANNEL_ID', 1);
+					//更新在线用户列表
+					$this->loadModel('OnlineUser');
+//					var_dump(Variable::$onlineUsers);
+//					$config = & Configure::getInstance();
+//					if (!isset($config->AAConlineUsers)) {
+//						$config->AAConlineUsers = array();
+//					}
+//					$onlineUsers = Configure::read('AAConlineUsers');
+//					global $globalAAC;
+//					if (!isset($GLOBALS['AAConlineUsers'])) {
+//						$GLOBALS['AAConlineUsers'] = array();
+//					}
+//					Configure::write('AAConlineUsers', $onlineUsers);
+//					array_push(&Configure::read('AAConlineUsers'), $user['User']);
+//					var_dump($user['User']);
+//					var_dump(Configure::read('AAConlineUsers'));
+					$this->OnlineUser->create();
+					$this->OnlineUser->save(array(
+						'OnlineUser'=>array(
+							'user_id'=>$user['User']['id'],
+							'user_login_name'=>$user['User']['login_name'],
+							'user_group'=>$user['User']['user_group'],
+							'channel_id'=>-1,
+							'last_login_time'=>date("Y-m-d H:i:s"),
+							'last_login_ip'=>$this->RequestHandler->getClientIP()
+						)
+					));
+					
+					//写用户登录信息入数据库
 					$user['User']['last_login_time'] = date("Y-m-d H:i:s");
 					$user['User']['last_login_ip'] = $this->RequestHandler->getClientIP();
 					$this->User->save($user);
@@ -34,6 +68,10 @@ class UsersController extends AppController {
 	}
 	
 	function logout() {
+		//删除当前用户 in 在线用户列表
+		$this->loadModel('OnlineUser');
+//		var_dump($this -> Session -> read('AAC_USER_ID'));
+		$this->OnlineUser->delete((int)($this -> Session -> read('AAC_USER_ID')));
 		$this->Session->delete('AAC_USER_ID');
 		$this->Session->delete('AAC_USER_LOGIN_NAME');
 		$this->redirect(array('controller' => '/'));
