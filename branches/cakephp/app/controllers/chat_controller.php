@@ -53,9 +53,11 @@ class ChatController extends AppController {
 		$messages = $this->Message->find('all', array('conditions' => array('Message.id >' => $messageId)));
 		$endMessage = end($messages);
 //		var_dump($endMessage);
-		$messagesXml = $this->Xml->getXmlMessages($messages);
+		$messagesXml = $this->Xml->getXmlMessages($messages, $this->Session->read('AAC_USER_ID'));
 			
 		$this->set(array (
+			'userId' => $this->Session->read('AAC_USER_ID'),
+			'userLoginName' => $this->Session->read('AAC_USER_LOGIN_NAME'),
 			'streamTime' => date('Y-m-d'),
 			'users' => $users,
 			'channelId' => '1',
@@ -70,14 +72,17 @@ class ChatController extends AppController {
 		//		Configure :: write('debug', 0);
 		//载入Message 模型控制
 		$this->loadModel('Message');
+		$this->loadModel('User');
 
 		$inputField = $this->params['form']['inputField'];
 		$channelId = $this->Session->read('AAC_CHANNEL_ID');
 		$isBoardcast = $this->params['form']['isBoardcast'];
 		$toId = $this->params['form']['toId'];
-//		if (isset($isBoardcast) && $isBoardcast == '0') {
-//			$toId = $this->params['form']['message_to_id'];
-//		}
+		$toLoginName = '';
+		if (isset($toId)) {
+			$toUser = $this->User->findById($toId);
+			$toLoginName = $toUser['User']['login_name'];
+		}
 		//添加一条聊天记录
 		$this->Message->create();
 		$this->Message->save(array (
@@ -88,7 +93,7 @@ class ChatController extends AppController {
 				'message_from_login_name' => $this->Session->read('AAC_USER_LOGIN_NAME'),
 				'is_boardcast' => $isBoardcast,
 				'message_to_id' => $toId,
-				'message_to_login_name' => '',//TODO: 修改to name
+				'message_to_login_name' => $toLoginName,
 				'message_time' => date('Y-m-d H:i:s'),
 				'content' => $inputField
 			)

@@ -1,7 +1,11 @@
 //全局变量
 var aacGlobal = {
 	isChatListEven: true,
-	currentMessageId: 0
+	isScrollMessages : true,
+	currentMessageId: 0,
+	ckeditor : null,
+	isAutoFlash : true,
+	flashInterval : 3000
 };
 //XML帮助类
 var XmlHelper = {
@@ -15,7 +19,9 @@ var XmlHelper = {
 		var onlineUsers = xmlDoc.getElementsByTagName("user");
 		var usersHtml = "";
 		for (var i = 0; i < onlineUsers.length; i++) {
-			usersHtml += "<li id=\"user-"+onlineUsers[i].getAttribute('userId')+"\" class='user-in-list'> " + onlineUsers[i].getAttribute('userLoginName') +
+			usersHtml += "<li id=\"user-"+onlineUsers[i].getAttribute('userId')+"\" name="
+				+ onlineUsers[i].getAttribute('userLoginName') + " class='user-in-list'> "
+				+ onlineUsers[i].getAttribute('userLoginName') +
 				"	<ul>" +
 				"		<li><a href='#' class='chat-dm'>私聊</a>|</li>" +
 				"		<li><a href=\"#\">动作</a>|</li>" +
@@ -42,7 +48,7 @@ var XmlHelper = {
 				if (messages[i].childNodes[0] != undefined) {
 					messageContent = messages[i].childNodes[0].nodeValue;
 				}
-				insertMessage(messages[i].getAttribute('fromLoginName'),
+				this.insertMessage(messages[i].getAttribute('fromLoginName'),
 					messages[i].getAttribute('isBoardast'),
 					messages[i].getAttribute('toLoginName'),
 					messages[i].getAttribute('messageTime') ,messageContent);
@@ -50,6 +56,41 @@ var XmlHelper = {
 			}
 			aacGlobal.currentMessageId = messagesResponseId;
 		}
+	},
+	/**
+	 * 处理消息插入操作
+	 * @param message
+	 * @return
+	 */
+	insertMessage : function (fromLoginName, isBoardast, toLoginName, messageTime, messageContent){
+		var row_color = '';
+		if (aacGlobal.isChatListEven) {
+			row_color = 'row-even';
+		}
+		else {
+			row_color = 'row-odd';
+		}
+		var messageHtml = '<div class="chat-row ' + row_color + '">' +' ['
+			+ messageTime + ']     ' + fromLoginName;
+		if (isBoardast == '1') {
+			messageHtml += ' -> 所有人';
+		} else {
+			messageHtml += ' -> ' + toLoginName;
+		}
+		messageHtml += '<div class="chat-content">' + messageContent + '</div></div>';
+		$('#chat-list').append(messageHtml);
+		
+		// 聊天窗口自动下滚
+		if (aacGlobal.isScrollMessages) {
+			$('#chat-list').scrollTop(99999);
+			$('#input-field').focus();
+		}
+		//修改Message奇偶数 CSS效果
+		aacGlobal.isChatListEven = !aacGlobal.isChatListEven;
+		
+		//重新设定群聊
+		$('#is-boardcast').val('1');
+		$('#message-to-id').val('');
 	}
 };
 //聊天帮助类
@@ -57,7 +98,11 @@ var ChatHelper = {
 	initJQueryBind : function() {
 		//TODO:私聊
 		$('.chat-dm').click(function() {
-			alert($(this).parent());
+			
+			$('#is-boardcast').val('0');
+			$('#message-to-id').val($(this).parent().parent().parent().attr('id').substring(5));
+			aacGlobal.ckeditor.val('@'+ $(this).parent().parent().parent().attr('name') + ' ');
+			aacGlobal.ckeditor.focus();//TODO: focus() 存在问题
 		})
 	},
 	directMessage: function(userId, userLoginName) {
@@ -80,7 +125,7 @@ $(function(){
 		removePlugins : 'elementspath',
 		resize_enabled : false,
 		//修改输入模式为br
-//		enterMode : CKEDITOR.ENTER_BR,
+		enterMode : CKEDITOR.ENTER_BR,
 		shiftEnterMode : CKEDITOR.ENTER_P,
 		startupFocus : true
 		});
@@ -119,10 +164,12 @@ $(function(){
 
 
 	
-	/* ----- 函数调用 -----*/
-	
-//	setInterval("getRemoteData()", 3000);
-	getRemoteData();
+	/* ----- Flash函数调用 -----*/
+	if (aacGlobal.isAutoFlash) {
+		setInterval("getRemoteData()", aacGlobal.flashInterval);
+	} else {
+		getRemoteData();
+	}
 	
 });
 
@@ -168,7 +215,8 @@ function getRemoteData(){
 function postData(){
 
 	var postData = {'inputField' :aacGlobal.ckeditor.val(), 
-		'isBoardcast': 'true'};
+		'isBoardcast': $('#is-boardcast').val(),
+		'toId': $('#message-to-id').val()};
 	jQuery.post("http://localhost/AzaAjaxChat/src/Chat/post", postData);
 	aacGlobal.ckeditor.val('');
 }
@@ -188,28 +236,4 @@ function getRemoteDataCallBack(xmlDoc){
 	XmlHelper.doXmlDoc(xmlDoc);
 	$('#connect-status').css('background', '');
 	ChatHelper.initJQueryBind();
-}
-
-/**
- * 处理消息插入操作
- * @param message
- * @return
- */
-function insertMessage(fromLoginName, isBoardast, toLoginName, messageTime, messageContent){
-	var row_color = '';
-	if (aacGlobal.isChatListEven) {
-		row_color = 'row-even';
-	}
-	else {
-		row_color = 'row-odd';
-	}
-	var messageHtml = '<div class="chat-row ' + row_color + '">' + fromLoginName +' 在 ['
-		+ messageTime + '] ';
-	messageHtml += '向大家说： ';
-	messageHtml += '<div class="chat-content">' + messageContent + '</div></div>';
-	$('#chat-list').append(messageHtml);
-	// 聊天窗口自动下滚
-	$('#chat-list').scrollTop(99999);
-	$('#input-field').focus();
-	aacGlobal.isChatListEven = !aacGlobal.isChatListEven;
 }
