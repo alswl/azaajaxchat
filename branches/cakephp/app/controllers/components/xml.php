@@ -11,15 +11,35 @@ class XmlComponent extends Object {
 	 * xml化在线用户列表
 	 */
 	function getXmlOnlineUsers($onlineUsers ,$channelId = -1) {
-		$users = '';
+		$usersXml = '';
 //		var_dump($onlineUsers);
 		foreach ($onlineUsers as $onlineUser) {
 			$userId = $onlineUser['OnlineUser']['user_id'];
 			$userLoginName = $onlineUser['OnlineUser']['user_login_name'];
-			$users .= "<user userId=\"$userId\" userLoginName=\"$userLoginName\" />" . "\n";
+			$usersXml .= "<user userId=\"$userId\" userLoginName=\"$userLoginName\" />" . "\n";
 		}
 		
-		return $users;
+		return $usersXml;
+	}
+	
+	function getXmlMessages($messages ,$channelId = -1) {
+		
+		$messagesXml = '';
+		foreach ($messages as $message) {
+			
+			$messageId = $message['Message']['id'];
+			$messageFromId = $message['Message']['message_from_id'];
+			$messageFromLoginName = $message['Message']['message_from_login_name'];
+			$isBoardcast = $message['Message']['is_boardcast'];
+			$messageToId = $message['Message']['message_to_id'];
+			$messageToLoginName = $message['Message']['message_to_login_name'];
+			$messageTime = $message['Message']['message_time'];
+			$messageContent = htmlentities($message['Message']['content'], ENT_COMPAT, 'UTF-8');
+			$messagesXml .= "<message id=\"$messageId\" fromId=\"$messageFromId\" fromLoginName=\"$messageFromLoginName\" isBoardast=\"$isBoardcast\" toId=\"$messageToId\"  toLoginName=\"$messageToLoginName\" messageTime=\"$messageTime\">"
+				. "$messageContent" . "</message>\n";
+		}
+		return $messagesXml;
+
 	}
 }
 ?>

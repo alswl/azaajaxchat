@@ -1,5 +1,5 @@
 /**
- * wpAdmin Frame
+ * 主页CSS 具体文件
  * index css
  * author: alswl
  * site: http://dddspace.com
@@ -14,40 +14,37 @@
 }
 
 #container {
+	-moz-border-radius: 11px;
+	-moz-box-shadow: 0 4px 18px #666666;
+	-webkit-box-shadow: 0 4px 18px #666666;
+	-khtml-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	padding: 10px;
 }
 
 #chat-list-container {
 	float: left;
 	width: 64%;
-	height: 400px;
-	-moz-border-radius: 11px;
-	-moz-box-shadow: 0 4px 18px #666666;
-	-webkit-box-shadow: 0 4px 18px #666666;
-	-khtml-border-radius: 11px;
-	-webkit-border-radius: 11px;
-	border-radius: 11px;
+	height: 360px;
 	background: none repeat scroll 0 0 #FFFFFF;
 	padding: 10px;
+	border: 2px solid #aaa;
 }
 
 #sidebar {
 	float: right;
 	width: 28%;
-	height: 400px;
+	height: 360px;
 	padding: 10px;
-	margin: 0 0 20px;
-	-moz-border-radius: 11px;
-	-moz-box-shadow: 0 4px 18px #666666;
-	-webkit-box-shadow: 0 4px 18px #666666;
-	-khtml-border-radius: 11px;
-	-webkit-border-radius: 11px;
-	border-radius: 11px;
+	margin: 0 0 8px;
 	background: none repeat scroll 0 0 #FFFFFF;
+	border:1px solid #CCCCCC;
 }
 
 #footer {
 	text-align: center;
-	margin-top: 30px;
+	margin-top: 10px;
 }
 
 /*---- Header ----*/
@@ -57,20 +54,26 @@ h1 {
 
 /*---- Container ----*/
 #chat-list {
-	border: 2px solid #aaa;
 	height: 92%;
 	padding: 10px;
 	overflow: auto;
 }
 
 .chat-row{
-	margin: 4px 0;
+	padding:5px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
 }
 .row-even {
 	background: #F1F1F1;
 }
 .row-odd {
 	background: #DEDFDF;
+}
+.chat-content {
+	background: #ffffff;
 }
 
 #function-container {
@@ -88,10 +91,6 @@ h1 {
 
 #input-field {
 	width: 500px;
-	-moz-border-radius: 11px;
-	-khtml-border-radius: 11px;
-	-webkit-border-radius: 11px;
-	border-radius: 11px;
 	background: none repeat scroll 0 0 #FFFFFF;
 }
 
@@ -114,3 +113,10 @@ h1 {
 #user-list ul {
 	margin-left: 20px;
 }
+.user-in-list {
+	clear: both;
+}
+.user-in-list ul li {
+	float: left;
+}
+

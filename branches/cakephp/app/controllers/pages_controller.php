@@ -11,6 +11,7 @@ class PagesController extends AppController {
 
 	var $name = 'Pages';
 	var $uses = null;
+	var $helpers = array('Ckeditor');
 	
 	var $components = array ('Html');
 	

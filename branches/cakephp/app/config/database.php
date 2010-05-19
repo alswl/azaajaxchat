@@ -81,6 +81,7 @@ class DATABASE_CONFIG {
 		'password' => 'admin',
 		'database' => 'aac_db',
 		'prefix' => 'aac_',
+		'encoding' => 'utf8'
 	);
 
 //	var $test = array(

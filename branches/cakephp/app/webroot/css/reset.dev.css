@@ -92,7 +92,7 @@ input, textarea, select, option {
 	font-family: 'Lucida Sans', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Sans Vera', Verdana, Arial, Tahoma, Helvetica, Sans-Serif;
 	font-size: 100%;
 	margin: 2px;
-	padding: 0.3em;
+	padding: 0.1em;
 }
 
 fieldset, legend {

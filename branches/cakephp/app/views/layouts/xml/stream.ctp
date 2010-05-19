@@ -3,7 +3,7 @@
     <users>
     	<?php echo $users;?>
     </users>
-    <messages>
+    <messages queryId="<?php echo $messagesQueryId;?>" responseId="<?php echo $messagesResponseId;?>">
     	<?php echo $messages;?>
     </messages>
 </stream>
