@@ -44,6 +44,8 @@
 		</div>
 		<div id="function-container" class="clear">
 			<div id="input-container" tabindex="01">
+				<input id="is-boardcast" type="hidden" value="1"/>
+				<input id="message-to-id" type="hidden"/>
 				<textarea id="input-field" class="text-nofocus"></textarea>
 				<button class="sexybutton sexylarge" id="submit" tabindex="11"> <span><span><span class="accept">Send</span></span></span> </button>
 			</div>

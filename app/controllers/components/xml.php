@@ -22,7 +22,7 @@ class XmlComponent extends Object {
 		return $usersXml;
 	}
 	
-	function getXmlMessages($messages ,$channelId = -1) {
+	function getXmlMessages($messages , $userId, $channelId = -1) {
 		
 		$messagesXml = '';
 		foreach ($messages as $message) {
@@ -35,8 +35,10 @@ class XmlComponent extends Object {
 			$messageToLoginName = $message['Message']['message_to_login_name'];
 			$messageTime = $message['Message']['message_time'];
 			$messageContent = htmlentities($message['Message']['content'], ENT_COMPAT, 'UTF-8');
-			$messagesXml .= "<message id=\"$messageId\" fromId=\"$messageFromId\" fromLoginName=\"$messageFromLoginName\" isBoardast=\"$isBoardcast\" toId=\"$messageToId\"  toLoginName=\"$messageToLoginName\" messageTime=\"$messageTime\">"
-				. "$messageContent" . "</message>\n";
+			if ($isBoardcast == 1 || $messageFromId ==$userId || $messageToId ==$userId) {
+				$messagesXml .= "<message id=\"$messageId\" fromId=\"$messageFromId\" fromLoginName=\"$messageFromLoginName\" isBoardast=\"$isBoardcast\" toId=\"$messageToId\"  toLoginName=\"$messageToLoginName\" messageTime=\"$messageTime\">"
+					. "$messageContent" . "</message>\n";
+			}
 		}
 		return $messagesXml;
 
