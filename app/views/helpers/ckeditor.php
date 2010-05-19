@@ -30,6 +30,7 @@ class CkeditorHelper extends AppHelper {
 		'height' => '500',
 		'toolbarSet' => 'Default',
 		'value' => '',
+		'skin' =>'kama',
 		'basePath' => '/js/ckeditor/'
 	);
 

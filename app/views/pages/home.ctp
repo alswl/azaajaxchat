@@ -5,7 +5,9 @@
 <link href="index.dev.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery-1.3.2.min.js" type="text/javascript">
 		</script>
-<script src="js/jquery.treeview.min.js" type="text/javascript">
+<script src="js/ckeditor/ckeditor.js" type="text/javascript">
+		</script>
+<script src="js/ckeditor/adapters/jquery.js" type="text/javascript">
 		</script>
 <script src="js/index.dev.js" type="text/javascript">
 		</script>
@@ -29,17 +31,14 @@
 			<option>Busy</option>
 		</select>
 	</div>
-	<hr/>
 	<div id="container">
 		<div id="chat-list-container">
 			<div id="chat-list">
-				<div class="chat-row">Hello A</div>
-				<div class="chat-row">Hello B</div>
 			</div>
 		</div>
 		<div id="sidebar"> <span> </span>
 			<h3>Current User Online</h3>
-			<ul id="user-list" class="filetree treeview-famfamfam">
+			<ul id="user-list" class="">
 				<?php echo $onlineUsers; ?>
 			</ul>
 		</div>

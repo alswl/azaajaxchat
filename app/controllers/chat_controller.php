@@ -45,32 +45,23 @@ class ChatController extends AppController {
 		$messageId = $this->params['url']['messageId'];
 
 		//xml化在线用户列表
-//		$userId = 1;
-//		$userLoginName = 'alswl';
-//		$users = "<user userId=\"$userId\" userLoginName=\"$userLoginName\" />";
-
-//		var_dump(Configure::read('AACcurrentMessageId'));
-//		$config = & Configure::getInstance();
-
 		$this->loadModel('OnlineUser');
-//		var_dump($this->OnlineUser->find('all'));
 		$users = $this->Xml->getXmlOnlineUsers($this->OnlineUser->find('all'));
 
 		//xml化消息列表
-		$messageFrom = 'aUser';
-		$isBoardcast = 'true';
-		$messageTo = '';
-		$messageTime = date('H:i:s');
-		$messageContent = 'text here';
-		$messages = "<message from=\"$messageFrom\" isBoardast=\"$isBoardcast\" to=\"$messageTo\"  messageTime=\"$messageTime\">"
-			. "$messageContent" . "</message>";
-
+		$this->loadModel('Message');
+		$messages = $this->Message->find('all', array('conditions' => array('Message.id >' => $messageId)));
+		$endMessage = end($messages);
+//		var_dump($endMessage);
+		$messagesXml = $this->Xml->getXmlMessages($messages);
 			
 		$this->set(array (
 			'streamTime' => date('Y-m-d'),
 			'users' => $users,
 			'channelId' => '1',
-			'messages' => $messages
+			'messages' => $messagesXml,
+			'messagesQueryId' => $messageId,
+			'messagesResponseId' => $endMessage['Message']['id']
 		));
 	}
 
@@ -83,13 +74,21 @@ class ChatController extends AppController {
 		$inputField = $this->params['form']['inputField'];
 		$channelId = $this->Session->read('AAC_CHANNEL_ID');
 		$isBoardcast = $this->params['form']['isBoardcast'];
+		$toId = $this->params['form']['toId'];
+//		if (isset($isBoardcast) && $isBoardcast == '0') {
+//			$toId = $this->params['form']['message_to_id'];
+//		}
 		//添加一条聊天记录
-		echo $this->Message->create();
-		echo $this->Message->save(array (
+		$this->Message->create();
+		$this->Message->save(array (
 			'Message' => array (
 				'channel_id' => $channelId,
-				is_boardcast => $isBoardcast,
-				message_from => $this->Session->read('AAC_USER_ID'),
+				'is_boardcast' => $isBoardcast,
+				'message_from_id' => $this->Session->read('AAC_USER_ID'),
+				'message_from_login_name' => $this->Session->read('AAC_USER_LOGIN_NAME'),
+				'is_boardcast' => $isBoardcast,
+				'message_to_id' => $toId,
+				'message_to_login_name' => '',//TODO: 修改to name
 				'message_time' => date('Y-m-d H:i:s'),
 				'content' => $inputField
 			)

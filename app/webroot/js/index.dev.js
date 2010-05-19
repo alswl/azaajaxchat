@@ -1,4 +1,69 @@
-var aacGlobal = {};
+//全局变量
+var aacGlobal = {
+	isChatListEven: true,
+	currentMessageId: 0
+};
+//XML帮助类
+var XmlHelper = {
+	//处理XML
+	doXmlDoc: function(xmlDoc) {
+		this.rebuitOnlineUser(xmlDoc);
+		this.updateMessages(xmlDoc);
+	},
+	//重建在线用户列表
+	rebuitOnlineUser: function (xmlDoc){
+		var onlineUsers = xmlDoc.getElementsByTagName("user");
+		var usersHtml = "";
+		for (var i = 0; i < onlineUsers.length; i++) {
+			usersHtml += "<li id=\"user-"+onlineUsers[i].getAttribute('userId')+"\" class='user-in-list'> " + onlineUsers[i].getAttribute('userLoginName') +
+				"	<ul>" +
+				"		<li><a href='#' class='chat-dm'>私聊</a>|</li>" +
+				"		<li><a href=\"#\">动作</a>|</li>" +
+				"		<li><a href=\"#\">语聊</a>|</li>" +
+				"		<li><a href=\"#\">文件</a>|</li>" +
+				"		<li><a href=\"#\">屏蔽</a></li>" +
+				"	</ul>" +
+				"</li>\n";
+		}
+		usersHtml += "";
+		$('#user-list').empty().append(usersHtml);
+//		$("#user-list").treeview({
+//			collapsed: true,
+//			animated: "medium"
+//		});
+	},
+	//更新聊天记录
+	updateMessages: function (xmlDoc) {
+		var messagesResponseId = xmlDoc.getElementsByTagName("messages")[0].getAttribute('responseId');
+		if (messagesResponseId != "") {
+			var messages = xmlDoc.getElementsByTagName("message");
+			for (var i = 0; i < messages.length; i++) {
+				var messageContent = "";
+				if (messages[i].childNodes[0] != undefined) {
+					messageContent = messages[i].childNodes[0].nodeValue;
+				}
+				insertMessage(messages[i].getAttribute('fromLoginName'),
+					messages[i].getAttribute('isBoardast'),
+					messages[i].getAttribute('toLoginName'),
+					messages[i].getAttribute('messageTime') ,messageContent);
+				
+			}
+			aacGlobal.currentMessageId = messagesResponseId;
+		}
+	}
+};
+//聊天帮助类
+var ChatHelper = {
+	initJQueryBind : function() {
+		//TODO:私聊
+		$('.chat-dm').click(function() {
+			alert($(this).parent());
+		})
+	},
+	directMessage: function(userId, userLoginName) {
+		aacGlobal.ckeditor.val('@' + userLoginName);
+	}
+};
 $(function(){
 
 	/* ----- 数据初始化 ----- */
@@ -7,37 +72,56 @@ $(function(){
 	
 	/* ----- 界面初始化 ----- */
 	
-	// 侧边栏菜单树形化
-	$("#user-list").treeview({
-		collapsed: true,
-		animated: "medium"
-	});
+	aacGlobal.ckeditor = $('#input-field').ckeditor(function() {
+		}, {
+		skin : 'kama',
+		width: 500,
+		height: 60,
+		removePlugins : 'elementspath',
+		resize_enabled : false,
+		//修改输入模式为br
+//		enterMode : CKEDITOR.ENTER_BR,
+		shiftEnterMode : CKEDITOR.ENTER_P,
+		startupFocus : true
+		});
 	
-	/* ----- 函数绑定 ----- */
+	/* ----- 特效函数绑定 ----- */
 	
 	// 输入框的颜色切换
-	$("#input-field").focus(function(){
-		$("#input-field").addClass("text-focus").removeClass("text-nofocus");
-	});
-	$("#input-field").blur(function(){
-		$("#input-field").addClass("text-nofocus").removeClass("text-focus");
-	});
-	
-	$("#chat-list div:even").addClass("row-even");
-	$("#chat-list div:odd").addClass("row-odd");
+//	$("#cke_input-field").focus(function(){
+//		$("#cke_input-field").addClass("text-focus").removeClass("text-nofocus");
+//	});
+//	$("#cke_input-field").blur(function(){
+//		$("#cke_input-field").addClass("text-nofocus").removeClass("text-focus");
+//	});
+
+	//用户列表滑动效果
+//	$('#user-list > li').click(function() {
+//		this.fadeIn("slow");
+//	});
+
+	/* ----- 逻辑函数绑定 ----- */
 	
 	// 聊天框回复按钮点击
 	$("#submit").click(postData);
 	// 聊天框Ctrl+Enter回复
-	$("#input-field").keypress(function(e){
-		if (e.ctrlKey && e.which == 13 || e.which == 10) {
-			$("#submit").click();
-		}
-	})
+//	aacGlobal.ckeditor.key('key', function(e){
+//		if (e.ctrlKey && e.which == 13 || e.which == 10) {
+//			$("#submit").click();
+//		}
+//	});
+//	keypress(function(e){
+//		if (e.ctrlKey && e.which == 13 || e.which == 10) {
+//			$("#submit").click();
+//		}
+//	})
+
+
+
 	
 	/* ----- 函数调用 -----*/
 	
-	// setInterval("getRemoteData()", 3000);
+//	setInterval("getRemoteData()", 3000);
 	getRemoteData();
 	
 });
@@ -71,22 +155,22 @@ function getXmlData(xmlUrl){
  * @return
  */
 function getRemoteData(){
-	//TODO: 获取当前最后一条消息id
-	aacGlobal.currentMessageId = aacGlobal.currentMessageId === NaN ? aacGlobal.currentMessageId + 1 : 0;
-	var postData = 'input-field=' + $('#input-field').val();
+	//获取当前最后一条消息id
+//	aacGlobal.currentMessageId = aacGlobal.currentMessageId === NaN ? aacGlobal.currentMessageId + 1 : 0;
+	$('#connect-status').css('background', 'none repeat scroll 0 0 #FF0000');
 	jQuery.get("http://localhost/AzaAjaxChat/src/Chat/getXml", {
-		messageId: aacGlobal.currentMessageId
+		messageId: aacGlobal.currentMessageId,
+		version: Math.random()
 	}, getRemoteDataCallBack);
-	
+	return;
 }
 
 function postData(){
 
-	var postData = 'inputField=' + $('#input-field').val() +
-		'&isBoardcast=true' +
-		'';
+	var postData = {'inputField' :aacGlobal.ckeditor.val(), 
+		'isBoardcast': 'true'};
 	jQuery.post("http://localhost/AzaAjaxChat/src/Chat/post", postData);
-	$('#input-field').val('');
+	aacGlobal.ckeditor.val('');
 }
 
 /**
@@ -94,14 +178,16 @@ function postData(){
  * @param data
  * @return
  */
-function getRemoteDataCallBack(data){
+function getRemoteDataCallBack(xmlDoc){
 	// var jsonData = eval("(" + data + ")");
 	// insertMessage(jsonData.data);
 	
 	// get xml data
 	//	var xmlData = getXmlData(data);
 	
-	insertMessage(data.getElementsByTagName("message")[0].childNodes[0].nodeValue);
+	XmlHelper.doXmlDoc(xmlDoc);
+	$('#connect-status').css('background', '');
+	ChatHelper.initJQueryBind();
 }
 
 /**
@@ -109,7 +195,7 @@ function getRemoteDataCallBack(data){
  * @param message
  * @return
  */
-function insertMessage(message){
+function insertMessage(fromLoginName, isBoardast, toLoginName, messageTime, messageContent){
 	var row_color = '';
 	if (aacGlobal.isChatListEven) {
 		row_color = 'row-even';
@@ -117,7 +203,11 @@ function insertMessage(message){
 	else {
 		row_color = 'row-odd';
 	}
-	$('#chat-list').append('<div class="chat-row ' + row_color + '">' + message + '</div>');
+	var messageHtml = '<div class="chat-row ' + row_color + '">' + fromLoginName +' 在 ['
+		+ messageTime + '] ';
+	messageHtml += '向大家说： ';
+	messageHtml += '<div class="chat-content">' + messageContent + '</div></div>';
+	$('#chat-list').append(messageHtml);
 	// 聊天窗口自动下滚
 	$('#chat-list').scrollTop(99999);
 	$('#input-field').focus();
