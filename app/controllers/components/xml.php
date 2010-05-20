@@ -33,10 +33,11 @@ class XmlComponent extends Object {
 			$isBoardcast = $message['Message']['is_boardcast'];
 			$messageToId = $message['Message']['message_to_id'];
 			$messageToLoginName = $message['Message']['message_to_login_name'];
+			$action = $message['Message']['action'];
 			$messageTime = $message['Message']['message_time'];
 			$messageContent = htmlentities($message['Message']['content'], ENT_COMPAT, 'UTF-8');
 			if ($isBoardcast == 1 || $messageFromId ==$userId || $messageToId ==$userId) {
-				$messagesXml .= "<message id=\"$messageId\" fromId=\"$messageFromId\" fromLoginName=\"$messageFromLoginName\" isBoardast=\"$isBoardcast\" toId=\"$messageToId\"  toLoginName=\"$messageToLoginName\" messageTime=\"$messageTime\">"
+				$messagesXml .= "<message id=\"$messageId\" fromId=\"$messageFromId\" fromLoginName=\"$messageFromLoginName\" isBoardast=\"$isBoardcast\" toId=\"$messageToId\"  toLoginName=\"$messageToLoginName\"  action=\"$action\" messageTime=\"$messageTime\">"
 					. "$messageContent" . "</message>\n";
 			}
 		}

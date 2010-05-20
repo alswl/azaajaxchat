@@ -9,6 +9,10 @@
 		</script>
 <script src="js/ckeditor/adapters/jquery.js" type="text/javascript">
 		</script>
+<script type="text/javascript" src="js/ui/ui.core.js"></script>
+<script type="text/javascript" src="js/ui/ui.draggable.js"></script>
+<script type="text/javascript" src="js/ui/ui.resizable.js"></script>
+<script type="text/javascript" src="js/ui/ui.dialog.js"></script>
 <script src="js/index.dev.js" type="text/javascript">
 		</script>
 <title>AzaAjaxChat</title>
@@ -18,13 +22,13 @@
 	<div id="header">
 		<h1>AzaAjaxChat</h1>
 		<select>
-			<option selected="selected">Public Room</option>
+			<option selected="selected">公共聊天室</option>
 			<option>Private Room</option>
 			<option>Create Room</option>
 		</select>
-		Welcome <a href="#"><?php echo $session->read('AAC_USER_LOGIN_NAME');?></a>
+		欢迎  <a href="#"><?php echo $session->read('AAC_USER_LOGIN_NAME');?></a>
 		<a class="sexybutton" href="<?php echo $html->url(array('controller'=>'Users', 'action'=>'logout')); ?>" tabindex="41"><span><span><span class="logout">Logout</span></span></span></a>
-		<span id="connect-status">Connected</span>
+		<span id="connect-status">连接状态</span>
 		<select>
 			<option selected="selected">Online</option>
 			<option>Leave</option>
@@ -52,19 +56,19 @@
 			<div id="config-container">
 				<ul>
 					<li>
-						<button  class="sexybutton" title="Lock Screen"  tabindex="31"><span><span><span class="lock"></span></span></span></button>
+						<button id="btn-lock" class="sexybutton" title="锁定/解锁 滚屏"  tabindex="31"><span><span><span class="lock"></span></span></span></button>
 					</li>
 					<li>
-						<button  class="sexybutton" title="Group" tabindex="32"><span><span><span class="group"></span></span></span></button>
+						<button id="btn-group" class="sexybutton" title="显示/隐藏 在线用户" tabindex="32"><span><span><span class="group"></span></span></span></button>
 					</li>
 					<li>
-						<button  class="sexybutton" title="Sound" tabindex="33"><span><span><span class="sound"></span></span></span></button>
+						<button id="btn-sound" class="sexybutton" title="开/关 声音" tabindex="33"><span><span><span class="sound"></span></span></span></button>
 					</li>
 					<li>
 						<button  class="sexybutton" title="Config" tabindex="34"><span><span><span class="config"></span></span></span></button>
 					</li>
 					<li>
-						<button  class="sexybutton" title="Help" tabindex="35"><span><span><span class="help"></span></span></span></button>
+						<button id="btn-info" class="sexybutton" title="关于" tabindex="35"><span><span><span class="help"></span></span></span></button>
 					</li>
 				</ul>
 			</div>
@@ -72,6 +76,14 @@
 		<div class="clear"></div>
 	</div>
 	<div id="footer"> &copy;CopyRight 2010 AzaAjaxChat </div>
+	<div id="dialog" class=""></div>
+	<div id="aac-info">
+		<p>
+			&copy;CopyRight 2010 AzaAjaxChat<br/>
+			author: alswl<br/>
+			site: dddspace.com<br/>mail: alswlx@gmail.com<br/>
+		</p>
+	</div>
 </div>
 </body>
 </html>

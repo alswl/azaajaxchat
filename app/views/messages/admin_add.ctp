@@ -5,8 +5,11 @@
 	<?php
 		echo $this->Form->input('channel_id');
 		echo $this->Form->input('is_boardcast');
-		echo $this->Form->input('message_from');
-		echo $this->Form->input('message_to');
+		echo $this->Form->input('message_from_id');
+		echo $this->Form->input('message_from_login_name');
+		echo $this->Form->input('message_to_id');
+		echo $this->Form->input('message_to_login_name');
+		echo $this->Form->input('action');
 		echo $this->Form->input('message_time');
 		echo $this->Form->input('content');
 	?>

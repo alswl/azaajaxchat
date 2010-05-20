@@ -59,6 +59,9 @@ html {
 .sexybutton span.lock {
 	background-image: url(images/icons/silk/lock.png) !important;
 }
+.sexybutton span.lock-open {
+	background-image: url(images/icons/silk/lock_open.png) !important;
+}
 
 .sexybutton span.group {
 	background-image: url(images/icons/silk/group.png) !important;
@@ -68,12 +71,28 @@ html {
 	background-image: url(images/icons/silk/sound.png) !important;
 }
 
+.sexybutton span.sound-off {
+	background-image: url(images/icons/silk/sound_mute.png) !important;
+}
+
 .sexybutton span.config {
 	background-image: url(images/icons/silk/cog.png) !important;
 }
 
 .sexybutton span.help {
 	background-image: url(images/icons/silk/help.png) !important;
+}
+.sexybutton span.mail {
+	background-image: url(images/icons/silk/email.png) !important;
+}
+.sexybutton span.phone {
+	background-image: url(images/icons/silk/phone_sound.png) !important;
+}
+.sexybutton span.page {
+	background-image: url(images/icons/silk/page.png) !important;
+}
+.sexybutton span.heart {
+	background-image: url(images/icons/silk/heart.png) !important;
 }
 
 /*---- 输入框焦点 ----*/
