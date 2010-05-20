@@ -50,8 +50,14 @@ class ChatController extends AppController {
 
 		//xml化消息列表
 		$this->loadModel('Message');
-		$messages = $this->Message->find('all', array('conditions' => array('Message.id >' => $messageId)));
-		$endMessage = end($messages);
+		//是否初始message == -1 传回空array
+		if ($messageId == '-1') {
+			$messages = array();
+		} else {
+			$messages = $this->Message->find('all', array('conditions' => array('Message.id >' => $messageId)));
+		}
+		//获取最后一条消息，产生responseId
+		$endMessage = $this->Message->find('first', array('order' => array('Message.id DESC')));
 //		var_dump($endMessage);
 		$messagesXml = $this->Xml->getXmlMessages($messages, $this->Session->read('AAC_USER_ID'));
 			
@@ -79,6 +85,7 @@ class ChatController extends AppController {
 		$isBoardcast = $this->params['form']['isBoardcast'];
 		$toId = $this->params['form']['toId'];
 		$toLoginName = '';
+		$action = $this->params['form']['action'];
 		if (isset($toId)) {
 			$toUser = $this->User->findById($toId);
 			$toLoginName = $toUser['User']['login_name'];
@@ -94,6 +101,7 @@ class ChatController extends AppController {
 				'is_boardcast' => $isBoardcast,
 				'message_to_id' => $toId,
 				'message_to_login_name' => $toLoginName,
+				'action' => $action,
 				'message_time' => date('Y-m-d H:i:s'),
 				'content' => $inputField
 			)

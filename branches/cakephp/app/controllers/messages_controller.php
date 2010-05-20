@@ -59,6 +59,7 @@ class MessagesController extends AppController {
 		$this->Session->setFlash(sprintf(__('%s was not deleted', true), 'Message'));
 		$this->redirect(array('action' => 'index'));
 	}
+
 	function admin_index() {
 		$this->layout = 'admin';
 		$this->Message->recursive = 0;

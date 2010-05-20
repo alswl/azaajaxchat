@@ -5,8 +5,11 @@
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('channel_id');?></th>
 			<th><?php echo $this->Paginator->sort('is_boardcast');?></th>
-			<th><?php echo $this->Paginator->sort('message_from');?></th>
-			<th><?php echo $this->Paginator->sort('message_to');?></th>
+			<th><?php echo $this->Paginator->sort('message_from_id');?></th>
+			<th><?php echo $this->Paginator->sort('message_from_login_name');?></th>
+			<th><?php echo $this->Paginator->sort('message_to_id');?></th>
+			<th><?php echo $this->Paginator->sort('message_to_login_name');?></th>
+			<th><?php echo $this->Paginator->sort('action');?></th>
 			<th><?php echo $this->Paginator->sort('message_time');?></th>
 			<th><?php echo $this->Paginator->sort('content');?></th>
 			<th class="actions"><?php __('Actions');?></th>
@@ -23,8 +26,11 @@
 		<td><?php echo $message['Message']['id']; ?>&nbsp;</td>
 		<td><?php echo $message['Message']['channel_id']; ?>&nbsp;</td>
 		<td><?php echo $message['Message']['is_boardcast']; ?>&nbsp;</td>
-		<td><?php echo $message['Message']['message_from']; ?>&nbsp;</td>
-		<td><?php echo $message['Message']['message_to']; ?>&nbsp;</td>
+		<td><?php echo $message['Message']['message_from_id']; ?>&nbsp;</td>
+		<td><?php echo $message['Message']['message_from_login_name']; ?>&nbsp;</td>
+		<td><?php echo $message['Message']['message_to_id']; ?>&nbsp;</td>
+		<td><?php echo $message['Message']['message_to_login_name']; ?>&nbsp;</td>
+		<td><?php echo $message['Message']['action']; ?>&nbsp;</td>
 		<td><?php echo $message['Message']['message_time']; ?>&nbsp;</td>
 		<td><?php echo $message['Message']['content']; ?>&nbsp;</td>
 		<td class="actions">

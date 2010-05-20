@@ -19,20 +19,6 @@ class UsersController extends AppController {
 					$this -> Session -> write('AAC_CHANNEL_ID', 1);
 					//更新在线用户列表
 					$this->loadModel('OnlineUser');
-//					var_dump(Variable::$onlineUsers);
-//					$config = & Configure::getInstance();
-//					if (!isset($config->AAConlineUsers)) {
-//						$config->AAConlineUsers = array();
-//					}
-//					$onlineUsers = Configure::read('AAConlineUsers');
-//					global $globalAAC;
-//					if (!isset($GLOBALS['AAConlineUsers'])) {
-//						$GLOBALS['AAConlineUsers'] = array();
-//					}
-//					Configure::write('AAConlineUsers', $onlineUsers);
-//					array_push(&Configure::read('AAConlineUsers'), $user['User']);
-//					var_dump($user['User']);
-//					var_dump(Configure::read('AAConlineUsers'));
 					$this->OnlineUser->create();
 					$this->OnlineUser->save(array(
 						'OnlineUser'=>array(
