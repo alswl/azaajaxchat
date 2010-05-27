@@ -60,4 +60,6 @@
 //}
 //Configure::write('AACcurrentMessageId', -1);
 //Configure::write('AAConlineUsers', array(''));
+date_default_timezone_set("Asia/Shanghai");
+Configure::write('AAConlineTimeout', 20);
 ?>

@@ -21,25 +21,35 @@ class ChatController extends AppController {
 	);
 
 	function beforeFilter() {
-//		$this->RequestHandler->setContent('json', 'text/x-json');
+		
+		parent::beforeFilter();
+		//判断是否有登录,没有登录跳转到登录窗口
+		if (!$this->Session->check('AAC_USER')) {
+
+			$this->Session->setFlash("当前用户未登录，请登录后继续操作");
+			$this->Session->write('goto', array('controller' => '/'));
+			$this->redirect("/Users/login");
+			exit();
+		}
 	}
 
 	//ajax 轮询 json格式
-	function getJson() {
-		//		$this->layout = 'ajax';
-		Configure :: write('debug', 0);
-		$inputField = '';
-		$userLoginName = '';
-		$inputField = $_POST['input-field'];
-		$userLoginName = $this->Session->read('AAC_USER_LOGIN_NAME');
-		$this->set('message', $userLoginName . ' says: ' . $inputField);
-
-	}
+//	function getJson() {
+//		//		$this->layout = 'ajax';
+//		Configure :: write('debug', 0);
+//		$inputField = '';
+//		$userLoginName = '';
+//		$inputField = $_POST['input-field'];
+//		$userLoginName = $this->Session->read('AAC_USER_LOGIN_NAME');
+//		$this->set('message', $userLoginName . ' says: ' . $inputField);
+//
+//	}
 
 	//ajax 轮询 XML格式
 	function getXml() {
 		$this->layout = "xml/stream";
 		Configure :: write('debug', 0);
+		$currentUser = $this->Session->read('AAC_USER');
 
 		//获取URL参数中的messageId参数
 		$messageId = $this->params['url']['messageId'];
@@ -59,11 +69,11 @@ class ChatController extends AppController {
 		//获取最后一条消息，产生responseId
 		$endMessage = $this->Message->find('first', array('order' => array('Message.id DESC')));
 //		var_dump($endMessage);
-		$messagesXml = $this->Xml->getXmlMessages($messages, $this->Session->read('AAC_USER_ID'));
+		$messagesXml = $this->Xml->getXmlMessages($messages, $currentUser["id"]);
 			
 		$this->set(array (
-			'userId' => $this->Session->read('AAC_USER_ID'),
-			'userLoginName' => $this->Session->read('AAC_USER_LOGIN_NAME'),
+			'userId' => $currentUser["id"],
+			'userLoginName' => $currentUser["login_name"],
 			'streamTime' => date('Y-m-d'),
 			'users' => $users,
 			'channelId' => '1',
@@ -76,9 +86,12 @@ class ChatController extends AppController {
 	function post() {
 		$this->layout = "ajax";
 		//		Configure :: write('debug', 0);
-		//载入Message 模型控制
+		//载入其他模型控制
 		$this->loadModel('Message');
 		$this->loadModel('User');
+		$this->loadModel('OnlineUser');
+		
+		$currentUser = $this->Session->read('AAC_USER');
 
 		$inputField = $this->params['form']['inputField'];
 		$channelId = $this->Session->read('AAC_CHANNEL_ID');
@@ -96,9 +109,8 @@ class ChatController extends AppController {
 			'Message' => array (
 				'channel_id' => $channelId,
 				'is_boardcast' => $isBoardcast,
-				'message_from_id' => $this->Session->read('AAC_USER_ID'),
-				'message_from_login_name' => $this->Session->read('AAC_USER_LOGIN_NAME'),
-				'is_boardcast' => $isBoardcast,
+				'message_from_id' => $currentUser["id"],
+				'message_from_login_name' => $currentUser["login_name"],
 				'message_to_id' => $toId,
 				'message_to_login_name' => $toLoginName,
 				'action' => $action,
@@ -106,6 +118,35 @@ class ChatController extends AppController {
 				'content' => $inputField
 			)
 		));
+		var_dump($currentUser);
+		var_dump($this->OnlineUser->find('count', array(
+			'user_id' => $currentUser["id"]
+		)));
+		var_dump($this->OnlineUser->find('count', array(
+			'user_id' => $currentUser["id"]
+		)) != 1);
+		//更新在线用户最后时间
+		//由于缓存的使用，这里将带来一点问题，不能手动修改数据库，必须自然失效，否则Count缓存数据有问题
+		//加上condition即可解决
+		if ($this->OnlineUser->find('count', array(
+			'user_id' => $currentUser["id"],
+			'conditions' => '1 =1'
+		)) != 1) {
+			$this->OnlineUser->save(array(
+				'OnlineUser'=>array(
+					'user_id'=>$currentUser['id'],
+					'user_login_name'=>$currentUser['login_name'],
+					'user_group'=>$currentUser['user_group'],
+					'channel_id'=>-1,
+					'last_login_time'=>date("Y-m-d H:i:s"),
+					'last_login_ip'=>$this->RequestHandler->getClientIP()
+				)
+			));
+		} else {
+			echo "save";
+			$this->OnlineUser->id = $currentUser["id"];
+			$this->OnlineUser->saveField('last_login_time', date('Y-m-d H:i:s'));
+		}
 	}
 
 	//测试XML格式输出

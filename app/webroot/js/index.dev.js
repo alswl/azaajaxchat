@@ -1,5 +1,7 @@
 //全局变量
 var aacGlobal = {
+	currentUserId: null,
+	currentUserLoginName: null,
 	isChatListEven: true,
 	isScrollMessages: true,
 	isSoundOn : true,
@@ -7,7 +9,12 @@ var aacGlobal = {
 	ckeditor: null,
 	isAutoFlash: true,
 	flashInterval: 3000,
-	dialog: null
+	dialog: null,
+	azaFlexChatDiaLog: null,
+	serverUrl: "http://192.168.160.224/",
+	appUrl: "AzaAjaxChat/src/",
+	flexServer: "rtmp://192.168.160.224/",
+	chatChannel: "chat"
 };
 //XML帮助类
 var XmlHelper = {
@@ -35,8 +42,7 @@ var XmlHelper = {
 			"	<ul>" +
 			'		<li><button class="sexybutton chat-dm" title="私聊" ><span><span><span class="mail">私聊</span></span></span></button></li>' +
 			'		<li><button class="sexybutton chat-nudge" title="动Ta" ><span><span><span class="heart">动Ta</span></span></span></button></li>' +
-			'		<li><button class="sexybutton chat-voice" title="语音" ><span><span><span class="phone">语音</span></span></span></button></li>' +
-			'		<li><button class="sexybutton chat-file" title="文件" ><span><span><span class="page">文件</span></span></span></button></li>' +
+			'		<li><button class="sexybutton chat-video" title="视频" ><span><span><span class="phone">视频</span></span></span></button></li>' +
 			"	</ul>" +
 			"</li>\n";
 		}
@@ -68,6 +74,17 @@ var XmlHelper = {
 					$("#dialog").append(messages[i].getAttribute('fromLoginName') + ' 动了' 
 					+ messages[i].getAttribute('toLoginName') + '一下');
 					aacGlobal.dialog.dialog('open');
+				}  else if (messages[i].getAttribute('action') == 'video.start' &&
+						messages[i].getAttribute('toLoginName') == aacGlobal.currentUserLoginName) {
+					getFlexApp('AzaFlexChat').initParams(
+						aacGlobal.flexServer + aacGlobal.chatChannel, messages[i].getAttribute('toLoginName'),
+						messages[i].getAttribute('fromLoginName'));
+				} else if (messages[i].getAttribute('action') == 'bot') {
+					var messageContent = "";
+					if (messages[i].childNodes[0] != undefined) {
+						messageContent = messages[i].childNodes[0].nodeValue;
+					}
+					this.insertMessage(messages[i].getAttribute('fromLoginName'), messages[i].getAttribute('isBoardast'), messages[i].getAttribute('toLoginName'), messages[i].getAttribute('messageTime'), messageContent);
 				}
 				
 			}
@@ -131,12 +148,31 @@ var ChatHelper = {
 			postData($(this).parent().parent().parent().attr('id').substring(5),
 				0, null, "nudge");
 		})
+		$('.chat-video').click(function(){
+		
+			$('#message-to-id').val($(this).parent().parent().parent().attr('id').substring(5));
+			getFlexApp('AzaFlexChat').initParams(
+				aacGlobal.flexServer + aacGlobal.chatChannel,
+				aacGlobal.currentUserLoginName,
+				$(this).parent().parent().parent().attr('name'));
+			postData($(this).parent().parent().parent().attr('id').substring(5),
+				0, null, "video.start");
+		})
 	}
 };
+function getFlexApp(appName){
+  if (navigator.appName.indexOf ("Microsoft") !=-1){
+    return window[appName];
+  }else {
+    return document[appName];
+  }
+}
 $(function(){
 
 	/* ----- 数据初始化 ----- */
 	aacGlobal.isChatListEven = false;
+	aacGlobal.currentUserId = null;
+	aacGlobal.currentUserLoginName = $('#current-user-login-name').html();
 	
 	/* ----- 界面初始化 ----- */
 	aacGlobal.ckeditor = $('#input-field').ckeditor(function(){
@@ -172,6 +208,20 @@ $(function(){
 		},
 		autoOpen:false
 	});
+//	aacGlobal.azaFlexChatDiaLog = $("#aac-flash");
+//	aacGlobal.azaFlexChatDiaLog = $("#aac-flash").dialog({
+//		bgiframe: true,
+//		title: "语音聊天",
+//		modal: true,
+//		buttons: {
+//			Ok: function() {
+//				$(this).dialog('close');
+//			}
+//		},
+//		height : 450,
+//		width: 700,
+//		autoOpen:false
+//	});
 	//屏幕锁定Bind
 	$('#btn-lock').click(function(){
 		aacGlobal.isScrollMessages = !aacGlobal.isScrollMessages;
@@ -181,16 +231,18 @@ $(function(){
 	$('#btn-group').toggle(function(){
 		$('#sidebar').fadeOut('fast');
 		$('#chat-list-container').css("width", "97%");
+		$('#chat-list').css("width", "650px");
 	}, function() {
 		$('#sidebar').fadeIn('slow');
 		$('#chat-list-container').css("width", "");
+		$('#chat-list').css("width", "326px");
 	});
 	//声音开关Bind
 	$('#btn-sound').click(function(){
 		aacGlobal.isSoundOn = !aacGlobal.isSoundOn;
 		$(this).find('span span span').toggleClass('sound-off');
 	});
-	//Info Bind
+	//关于 Bind
 	$('#btn-info').click(function(){
 		$("#aac-info").dialog('open');
 	});
@@ -261,7 +313,7 @@ function getXmlData(xmlUrl){
 function getRemoteData(){
 	//获取当前最后一条消息id
 	$('#connect-status').css('background', 'none repeat scroll 0 0 #FF0000');
-	jQuery.get("http://localhost/AzaAjaxChat/src/Chat/getXml", {
+	jQuery.get(aacGlobal.serverUrl + aacGlobal.appUrl + "Chat/getXml", {
 		messageId: aacGlobal.currentMessageId,
 		version: Math.random()
 	}, getRemoteDataCallBack);
@@ -289,7 +341,7 @@ function postData(toId, isBoardcast, inputField, action){
 		'inputField': inputField,
 		'action': action
 	};
-	jQuery.post("http://localhost/AzaAjaxChat/src/Chat/post", postData);
+	jQuery.post(aacGlobal.serverUrl + aacGlobal.appUrl + "/Chat/post", postData);
 }
 
 /**

@@ -7,6 +7,22 @@ class OnlineUsersController extends AppController {
 		$this->OnlineUser->recursive = 0;
 		$this->set('onlineUsers', $this->paginate());
 	}
+	
+	/**
+	 * 更新在线用户操作
+	 */
+	function refresh() {
+		set_time_limit(0);
+		ignore_user_abort (true);
+		//不同用户同一URL操作能成功？
+		while (true) {
+			//如果写入refresh == stop，则停止工作
+			if ($this->params['url']['refresh'] == 'stop') {
+				exit();
+			}
+			sleep(60 * 3);//5秒
+		}
+	}
 
 	function view($id = null) {
 		if (!$id) {
