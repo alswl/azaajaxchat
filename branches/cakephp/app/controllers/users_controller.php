@@ -13,10 +13,8 @@ class UsersController extends AppController {
 			if (!empty($user) && $user['User']['user_password'] == $this->params['form']['password']) {
 				//用户状态为启用
 				if ($user['User']['status'] == 1) {
-					//写SESSION相关内容
-					$this -> Session -> write('AAC_USER_ID', $user['User']['id']);
-					$this -> Session -> write('AAC_USER_LOGIN_NAME', $user['User']['login_name']);
-					$this -> Session -> write('AAC_CHANNEL_ID', 1);
+					//刷新在线用户
+					$this->removeInactiveUser();
 					//更新在线用户列表
 					$this->loadModel('OnlineUser');
 					$this->OnlineUser->create();
@@ -30,11 +28,17 @@ class UsersController extends AppController {
 							'last_login_ip'=>$this->RequestHandler->getClientIP()
 						)
 					));
-					
 					//写用户登录信息入数据库
 					$user['User']['last_login_time'] = date("Y-m-d H:i:s");
 					$user['User']['last_login_ip'] = $this->RequestHandler->getClientIP();
 					$this->User->save($user);
+					//写SESSION相关内容
+					$this -> Session -> write('AAC_USER', $user['User']);
+					$this -> Session -> write('AAC_CHANNEL_ID', 1);
+					//系统通知
+					$this->botMessage($user['User']['login_name'], "上线了");
+					
+//					$this->render("users/login");
 					$this->redirect(array('controller' => '/'));
 					exit();
 				} else {
@@ -53,13 +57,38 @@ class UsersController extends AppController {
 		
 	}
 	
+	function removeInactiveUser() {
+		$this->loadModel("OnlineUser");
+		$this->OnlineUser->deleteAll("NOW() > DATE_ADD(last_login_time, interval " . Configure::read("AAConlineTimeout") ." MINUTE)");
+	}
+	
+	private function botMessage($userLoginName, $message) {
+		$this->loadModel('Message');
+		$this->Message->create();
+		$this->Message->save(array (
+			'Message' => array (
+				'channel_id' => -1,
+				'is_boardcast' => 'true',
+				'message_from_id' => '-1',
+				'message_from_login_name' => '系统提示',
+				'is_boardcast' => 'true',
+				'message_to_id' => '',
+				'message_to_login_name' => '',
+				'action' => 'bot',
+				'message_time' => date('Y-m-d H:i:s'),
+				'content' => $userLoginName . $message
+			)
+		));
+	}
+	
 	function logout() {
 		//删除当前用户 in 在线用户列表
 		$this->loadModel('OnlineUser');
+		$currentUser = $this->Session->read('AAC_USER');
 //		var_dump($this -> Session -> read('AAC_USER_ID'));
-		$this->OnlineUser->delete((int)($this -> Session -> read('AAC_USER_ID')));
-		$this->Session->delete('AAC_USER_ID');
-		$this->Session->delete('AAC_USER_LOGIN_NAME');
+		$this->OnlineUser->delete((int)($currentUser["id"]));
+		$this->Session->delete('AAC_USER');
+		$this->botMessage($currentUser["login_name"], "下线了");
 		$this->redirect(array('controller' => '/'));
 		exit();
 	}

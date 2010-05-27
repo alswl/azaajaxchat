@@ -13,6 +13,7 @@
 <script type="text/javascript" src="js/ui/ui.draggable.js"></script>
 <script type="text/javascript" src="js/ui/ui.resizable.js"></script>
 <script type="text/javascript" src="js/ui/ui.dialog.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
 <script src="js/index.dev.js" type="text/javascript">
 		</script>
 <title>AzaAjaxChat</title>
@@ -26,7 +27,7 @@
 			<option>Private Room</option>
 			<option>Create Room</option>
 		</select>
-		欢迎  <a href="#"><?php echo $session->read('AAC_USER_LOGIN_NAME');?></a>
+		欢迎  <a href="#" id="current-user-login-name"><?php echo $currentUserLoginName;?></a>
 		<a class="sexybutton" href="<?php echo $html->url(array('controller'=>'Users', 'action'=>'logout')); ?>" tabindex="41"><span><span><span class="logout">Logout</span></span></span></a>
 		<span id="connect-status">连接状态</span>
 		<select>
@@ -39,11 +40,18 @@
 		<div id="chat-list-container">
 			<div id="chat-list">
 			</div>
+			<div id="aac-flash">
+		        <object id='AzaFlexChat' classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0' height='350' width='250'>
+		            <param name='src' value='flash/AzaFlexChat.swf'/>
+		            <param name="wmode" value="transparent">
+		            <param name='flashVars' value=''/>
+		            <embed name='AzaFlexChat' src='flash/AzaFlexChat.swf' pluginspage='http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash' wmode="transparent" height='350' width='250' flashVars=''/>
+		        </object>
+			</div>
 		</div>
 		<div id="sidebar"> <span> </span>
-			<h3>Current User Online</h3>
-			<ul id="user-list" class="">
-				<?php echo $onlineUsers; ?>
+			<h3>在线用户</h3>
+			<ul id="user-list" >
 			</ul>
 		</div>
 		<div id="function-container" class="clear">
@@ -65,9 +73,6 @@
 						<button id="btn-sound" class="sexybutton" title="开/关 声音" tabindex="33"><span><span><span class="sound"></span></span></span></button>
 					</li>
 					<li>
-						<button  class="sexybutton" title="Config" tabindex="34"><span><span><span class="config"></span></span></span></button>
-					</li>
-					<li>
 						<button id="btn-info" class="sexybutton" title="关于" tabindex="35"><span><span><span class="help"></span></span></span></button>
 					</li>
 				</ul>
@@ -75,15 +80,18 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div id="footer"> &copy;CopyRight 2010 AzaAjaxChat </div>
+
+	<div id="footer">&copy;CopyRight 2010 AzaAjaxChat </div>
 	<div id="dialog" class=""></div>
 	<div id="aac-info">
+
 		<p>
 			&copy;CopyRight 2010 AzaAjaxChat<br/>
 			author: alswl<br/>
 			site: dddspace.com<br/>mail: alswlx@gmail.com<br/>
 		</p>
 	</div>
+
 </div>
 </body>
 </html>

@@ -12,7 +12,7 @@ CKEDITOR.editorConfig = function( config )
 	config.toolbar =
 		[
 			['Bold','Italic','Underline','Strike','Link'],
-			['Image','Smiley',],
+			['Image','Smiley','File'],
 			['Font','FontSize'],
 			['TextColor','BGColor'],
 		];

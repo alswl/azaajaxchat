@@ -25,7 +25,7 @@
 
 #chat-list-container {
 	float: left;
-	width: 70%;
+	width: 62%;
 	height: 360px;
 	background: none repeat scroll 0 0 #FFFFFF;
 	padding: 10px;
@@ -34,7 +34,7 @@
 
 #sidebar {
 	float: right;
-	width: 22%;
+	width: 30%;
 	height: 360px;
 	padding: 10px;
 	margin: 0 0 8px;
@@ -54,8 +54,15 @@ h1 {
 
 /*---- Container ----*/
 #chat-list {
-	height: 92%;
+	height: 98%;
 	overflow: auto;
+	float: left;
+	width: 56%;
+}
+#aac-flash {
+	float:right;
+	overflow:hidden;
+	width:250px;
 }
 
 .chat-row{
@@ -104,7 +111,7 @@ h1 {
 }
 
 #user-list {
-	height: 340px;
+	height: 88%;
 	overflow: auto;
 	padding: 5px;
 	font: 24px bolder;
