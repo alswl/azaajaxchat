@@ -16,8 +16,8 @@
 				<div id="user-info" class="split">
 					<p>
 						<a title="Edit your profile" href="#"><?php echo $session->read('AAC_USER_LOGIN_NAME');?></a>
-						<span class="turbo-nag hidden">| <a href="#">Help</a></span>
-						|<?php echo $html->link('退出', '/Users/logout', array('title'=>'退出')); ?>
+						<span class="turbo-nag hidden"> 
+						| <?php echo $html->link('退出', '/Users/logout', array('title'=>'退出')); ?>
 					</p>
 				</div>
 				<div id="favorite-actions">
@@ -27,10 +27,10 @@
 					<span id="favorite-toggle">↓</span>
 					<div id="favorite-inside">
 						<div class="favorite-action">
-							<a href="#">添加新频道</a>
+							<a href="<?php echo $html->url('/admin/Messages/'); ?>">聊天信息管理</a>
 						</div>
 						<div class="favorite-action">
-							<a href="#">系统参数设定</a>
+							<a href="<?php echo $html->url('/admin/Users/'); ?>">用户信息管理</a>
 						</div>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 			<div id="sidebar">
 				<ul id="menu" class="filetree treeview-famfamfam">
 					<li>
-						<span class="folder">基础资料管理</span>
+						<span class="folder">用户信息管理</span>
 						<ul>
 							<li>
 								<a href="<?php echo $html->url('/admin/Users/'); ?>"><span class="file">用户信息管理</span></a>
@@ -48,36 +48,13 @@
 							<li>
 								<a href="<?php echo $html->url('/admin/Users/add'); ?>"><span class="file">添加新用户</span></a>
 							</li>
+						</ul>
+					</li>
+					<li>
+						<span class="folder">聊天信息管理</span>
+						<ul>
 							<li>
 								<a href="<?php echo $html->url('/admin/Messages/'); ?>"><span class="file">聊天记录管理</span></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<span class="folder">Group</span>
-						<ul>
-							<li>
-								<a href="#"><span class="file">Function 1</span></a>
-							</li>
-							<li>
-								<a href="#"><span class="file">Function 1</span></a>
-							</li>
-							<li>
-								<a href="#"><span class="file">Function 1</span></a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<span class="folder">Group</span>
-						<ul>
-							<li>
-								<a href="#"><span class="file">Function 1</span></a>
-							</li>
-							<li>
-								<a href="#"><span class="file">Function 1</span></a>
-							</li>
-							<li>
-								<a href="#"><span class="file">Function 1</span></a>
 							</li>
 						</ul>
 					</li>

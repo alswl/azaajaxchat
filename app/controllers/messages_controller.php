@@ -89,6 +89,7 @@ class MessagesController extends AppController {
 	}
 
 	function admin_edit($id = null) {
+		$this->layout = 'admin';
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(sprintf(__('Invalid %s', true), 'message'));
 			$this->redirect(array('action' => 'index'));

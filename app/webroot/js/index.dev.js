@@ -11,9 +11,9 @@ var aacGlobal = {
 	flashInterval: 3000,
 	dialog: null,
 	azaFlexChatDiaLog: null,
-	serverUrl: "http://192.168.160.224/",
+	serverUrl: "http://127.0.0.1/",
 	appUrl: "AzaAjaxChat/src/",
-	flexServer: "rtmp://192.168.160.224/",
+	flexServer: "rtmp://127.0.0.1/",
 	chatChannel: "chat"
 };
 //XML帮助类
@@ -245,6 +245,10 @@ $(function(){
 	//关于 Bind
 	$('#btn-info').click(function(){
 		$("#aac-info").dialog('open');
+	});
+	//关于 Bind
+	$('#btn-admin').click(function(){
+		window.open("admin/Users/");
 	});
 	/* ----- 特效函数绑定 ----- */
 	

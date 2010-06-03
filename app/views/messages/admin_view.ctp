@@ -56,7 +56,6 @@
 <div class="actions">
 	<h3><?php __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(sprintf(__('Edit %s', true), __('Message', true)), array('action' => 'edit', $message['Message']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(sprintf(__('Delete %s', true), __('Message', true)), array('action' => 'delete', $message['Message']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $message['Message']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(sprintf(__('List %s', true), __('Messages', true)), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(sprintf(__('New %s', true), __('Message', true)), array('action' => 'add')); ?> </li>

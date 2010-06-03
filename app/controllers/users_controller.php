@@ -3,7 +3,16 @@ class UsersController extends AppController {
 
 	var $name = 'Users';
 	var $helpers = array('Javascript');
-	var $components = array('RequestHandler');
+	var $components = array('RequestHandler', 'Cookie');
+	
+	function beforeFilter() {
+		  $this->Cookie->name = 'aac_cookie';
+		  $this->Cookie->time =  '10 Days';  // or '1 hour'
+		  $this->Cookie->path = '/AzaAjaxChat/src'; 
+		  $this->Cookie->domain = 'localhost';   
+		  $this->Cookie->secure = true;  //i.e. only sent if using secure HTTPS
+		  $this->Cookie->key = '1d34!#$5af+ae';
+	}
 	
 
 	function login() {
@@ -35,6 +44,13 @@ class UsersController extends AppController {
 					//写SESSION相关内容
 					$this -> Session -> write('AAC_USER', $user['User']);
 					$this -> Session -> write('AAC_CHANNEL_ID', 1);
+					
+					//写入Cookie
+//					if ($this->params['form']['rememberme'] == 'true') {
+//						$this->Cookie->write('name',$user['User']['id']);
+//						$this->Cookie->write('password',$user['User']['user_password']);
+//					}
+
 					//系统通知
 					$this->botMessage($user['User']['login_name'], "上线了");
 					
@@ -57,6 +73,47 @@ class UsersController extends AppController {
 		
 	}
 	
+	function regist() {
+		if (!empty($this->params['form'])) {
+			if ($this->params['form']['name'] == null || $this->params['form']['name'] == '')
+			{
+				$this->Session->setFlash("注册失败, 用户名不能为空");
+				$this->redirect("/Users/regist");
+				exit();
+			} else if ($this->params['form']['password'] == null || $this->params['form']['password'] == ''
+				|| $this->params['form']['password'] != $this->params['form']['password2'])
+			{
+				$this->Session->setFlash("注册失败, 密码不能为空并且两次密码必须一致");
+				$this->redirect("/Users/regist");
+				exit();
+			} else if ($this->params['form']['real_name'] == null || $this->params['form']['real_name'] == '')
+			{
+				$this->Session->setFlash("注册失败, 真实姓名不能为空");
+				$this->redirect("/Users/regist");
+				exit();
+			}
+			$user = $this->User->findByLoginName($this->params['form']['name']);
+			if (!empty($user)) {
+				$this->Session->setFlash("注册失败, 用户已经存在");
+				$this->redirect("/Users/regist");
+				exit();
+			}
+			$this->User->create();
+			$this->User->save(array(
+				'login_name' => $this->params['form']['name'],
+				'user_password' => $this->params['form']['password'],
+				'user_group' => 'user',
+				'real_name' => $this->params['form']['real_name'],
+				'register_time' => date("Y-m-d H:i:s"),
+				'last_login_ip' => $this->RequestHandler->getClientIP(),
+				'last_login_time' => date("Y-m-d H:i:s"),
+				'status' => '1'
+			));
+				$this->Session->setFlash("注册成功，请重新登陆");
+				$this->redirect("/Users/login");
+		}
+		$this->layout = "login";
+	}
 	function removeInactiveUser() {
 		$this->loadModel("OnlineUser");
 		$this->OnlineUser->deleteAll("NOW() > DATE_ADD(last_login_time, interval " . Configure::read("AAConlineTimeout") ." MINUTE)");

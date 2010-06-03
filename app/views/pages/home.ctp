@@ -75,6 +75,11 @@
 					<li>
 						<button id="btn-info" class="sexybutton" title="关于" tabindex="35"><span><span><span class="help"></span></span></span></button>
 					</li>
+					<?php if($currentUserGroup == 'admin') {?>
+					<li>
+						<button id="btn-admin" class="sexybutton" title="后台管理" tabindex="35"><span><span><span class="config"></span></span></span></button>
+					</li>
+					<?php } ?>
 				</ul>
 			</div>
 		</div>
