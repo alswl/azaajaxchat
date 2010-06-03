@@ -45,7 +45,7 @@ h1 a {
 	border-color: #E6DB55;
 }
 
-#user_pass, #user_name, #user_org {
+#user_pass, #user_name, #user_pass2, #real_name {
 	background: none repeat scroll 0 0 #FBFBFB;
 	border: 1px solid #E5E5E5;
 	margin-bottom: 16px;
@@ -55,13 +55,10 @@ h1 a {
 	width: 97%;
 }
 
-#user_pass, #user_name {
+#user_pass, #user_name, #user_pass2, #real_name {
 	font-size: 24px;
 }
 
-#user_org {
-	font-size: 16px;
-}
 
 #nav {
 	margin: 0 0 0 8px;

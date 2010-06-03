@@ -62,4 +62,6 @@
 //Configure::write('AAConlineUsers', array(''));
 date_default_timezone_set("Asia/Shanghai");
 Configure::write('AAConlineTimeout', 20);
+Configure::write('Config.language', 'chi');
+
 ?>

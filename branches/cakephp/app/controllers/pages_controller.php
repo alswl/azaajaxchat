@@ -37,13 +37,12 @@ class PagesController extends AppController {
 		$currentUser = $this->Session->read('AAC_USER');
 //		$onlineUsers = $this->Html->getHtmlOnlineUsers($this->OnlineUser->find('all'));
 		$this->set(array(
-			'currentUserLoginName' => $currentUser["login_name"]));
+			'currentUserLoginName' => $currentUser["login_name"],
+			'currentUserGroup' => $currentUser["user_group"]));
 		$this->render('home');
 	}
 	
-	function admin_index() {
-		$this->render('home');
-		
+	function admin() {
 		$this->layout = 'admin';
 	}
 }
