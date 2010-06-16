@@ -22,19 +22,10 @@
 <div id="wrapper">
 	<div id="header">
 		<h1>AzaAjaxChat</h1>
-		<select>
-			<option selected="selected">公共聊天室</option>
-			<option>Private Room</option>
-			<option>Create Room</option>
-		</select>
 		欢迎  <a href="#" id="current-user-login-name"><?php echo $currentUserLoginName;?></a>
 		<a class="sexybutton" href="<?php echo $html->url(array('controller'=>'Users', 'action'=>'logout')); ?>" tabindex="41"><span><span><span class="logout">Logout</span></span></span></a>
 		<span id="connect-status">连接状态</span>
-		<select>
-			<option selected="selected">Online</option>
-			<option>Leave</option>
-			<option>Busy</option>
-		</select>
+
 	</div>
 	<div id="container">
 		<div id="chat-list-container">
