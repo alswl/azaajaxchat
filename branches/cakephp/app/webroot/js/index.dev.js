@@ -11,9 +11,9 @@ var aacGlobal = {
 	flashInterval: 3000,
 	dialog: null,
 	azaFlexChatDiaLog: null,
-	serverUrl: "http://127.0.0.1/",
+	serverUrl: "http://192.168.1.104/",
 	appUrl: "AzaAjaxChat/src/",
-	flexServer: "rtmp://127.0.0.1/",
+	flexServer: "rtmp://192.168.1.104/",
 	chatChannel: "chat"
 };
 //XML帮助类
@@ -116,6 +116,7 @@ var XmlHelper = {
 		}
 		messageHtml += '<div class="chat-content">' + messageContent + '</div></div>';
 		$('#chat-list').append(messageHtml);
+		soundPlay();
 		
 		// 聊天窗口自动下滚
 		if (aacGlobal.isScrollMessages) {
@@ -275,7 +276,6 @@ $(function(){
 	
 	
 	
-	
 	/* ----- Flash函数调用 -----*/
 	if (aacGlobal.isAutoFlash) {
 		setInterval("getRemoteData()", aacGlobal.flashInterval);
@@ -356,4 +356,11 @@ function getRemoteDataCallBack(xmlDoc){
 	XmlHelper.doXmlDoc(xmlDoc);
 	$('#connect-status').css('background', '');
 	ChatHelper.initJQueryBind();
+}
+
+function soundPlay(){
+	if (aacGlobal.isSoundOn)
+	{
+		getFlexApp('AzaFlexChat').playSound("sound/sound_1.mp3");
+	}
 }
