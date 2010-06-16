@@ -1,0 +1,129 @@
+/**
+ * 主页CSS 具体文件
+ * index css
+ * author: alswl
+ * site: http://dddspace.com
+ * mail: alswlx@gmail.com
+ *
+ */
+/*---- Global ----*/
+/*---- Layout ----*/
+#wrapper {
+	width: 960px;
+	margin: 0 auto;
+}
+
+#container {
+	-moz-border-radius: 11px;
+	-moz-box-shadow: 0 4px 18px #666666;
+	-webkit-box-shadow: 0 4px 18px #666666;
+	-khtml-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+	padding: 10px;
+}
+
+#chat-list-container {
+	float: left;
+	width: 62%;
+	height: 360px;
+	background: none repeat scroll 0 0 #FFFFFF;
+	padding: 10px;
+	border: 2px solid #aaa;
+}
+
+#sidebar {
+	float: right;
+	width: 30%;
+	height: 360px;
+	padding: 10px;
+	margin: 0 0 8px;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border:1px solid #CCCCCC;
+}
+
+#footer {
+	text-align: center;
+	margin-top: 10px;
+}
+
+/*---- Header ----*/
+h1 {
+	display: inline;
+}
+
+/*---- Container ----*/
+#chat-list {
+	height: 98%;
+	overflow: auto;
+	float: left;
+	width: 56%;
+}
+#aac-flash {
+	float:right;
+	overflow:hidden;
+	width:250px;
+}
+
+.chat-row{
+	padding:5px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+}
+.row-even {
+	background: #F1F1F1;
+}
+.row-odd {
+	background: #DEDFDF;
+}
+.chat-content {
+	background: #ffffff;
+}
+
+#function-container {
+}
+
+#input-container {
+	float: left;
+	width: 70%;
+}
+
+#config-container {
+	float: right;
+	width: 28%;
+}
+
+#input-field {
+	width: 500px;
+	background: none repeat scroll 0 0 #FFFFFF;
+}
+
+#config-container li {
+	float: left;
+}
+
+/*---- Sibebar ----*/
+#sidebar h3 {
+	margin: 8px;
+	text-align: center;
+}
+
+#user-list {
+	height: 88%;
+	overflow: auto;
+	padding: 5px;
+	font: 24px bolder;
+}
+
+#user-list ul {
+	margin-left: 20px;
+}
+.user-in-list {
+	clear: both;
+}
+.user-in-list ul li {
+	float: left;
+}
+
