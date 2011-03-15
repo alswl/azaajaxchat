@@ -11,4 +11,4 @@
   * [http://dddspace.com/2010/05/swfobject.html SWFObject 一款JavaScript的Flash检测与插入模块]
   * [http://dddspace.com/2010/06/ie-xml-cache-problem.html IE XML 缓存问题]
   * [http://dddspace.com/2010/08/azaajaxchat-notes-implementation.html AzaAjaxChat笔记-框架]
-[http://dddspace.com/2010/08/azaajaxchat-notes-frame.html AzaAjaxChat笔记-实现]
+  * [http://dddspace.com/2010/08/azaajaxchat-notes-frame.html AzaAjaxChat笔记-实现]
